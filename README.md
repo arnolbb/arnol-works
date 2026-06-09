@@ -1,6 +1,6 @@
 ﻿# Arnol Works
 
-Arnol Works adalah website portfolio interaktif berbasis multi-tools platform di domain `arnol.web.id`.
+Arnol Works adalah website portfolio interaktif berbasis multi-tools platform di domain `arnol.my.id`.
 
 Website ini bukan website khusus PDF. Tools pertama yang dibangun adalah **Pisah PDF Warna & Hitam Putih / PDF Color/BW Splitter**, dengan arsitektur yang disiapkan agar tools lain mudah ditambahkan.
 

@@ -1,11 +1,11 @@
-# AGENTS.md — Arnol Works
+﻿# AGENTS.md â€” Arnol Works
 
 Instruksi ini wajib dibaca dan dipatuhi oleh Codex/coding agent sebelum melakukan perubahan kode.
 
 ## Identitas project
 
 Nama project: **Arnol Works**
-Domain target: `arnol.web.id`
+Domain target: `arnol.my.id`
 Jenis project: portfolio website + multi-tools platform
 Tools pertama: **PDF Color/BW Splitter / Pisah PDF Warna & Hitam Putih**
 
@@ -82,7 +82,7 @@ Default UI menggunakan bahasa Indonesia yang natural, sederhana, dan profesional
 
 Contoh tone:
 
-- “Pisahkan halaman PDF berwarna dan hitam-putih agar biaya print lebih hemat.”
-- “Kami sudah menandai halaman yang kemungkinan berwarna. Silakan cek dan ubah pilihan sebelum file dipisahkan.”
-- “Keputusan akhir tetap berdasarkan halaman yang kamu pilih.”
+- â€œPisahkan halaman PDF berwarna dan hitam-putih agar biaya print lebih hemat.â€
+- â€œKami sudah menandai halaman yang kemungkinan berwarna. Silakan cek dan ubah pilihan sebelum file dipisahkan.â€
+- â€œKeputusan akhir tetap berdasarkan halaman yang kamu pilih.â€
 

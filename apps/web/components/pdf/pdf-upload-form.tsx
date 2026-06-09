@@ -265,12 +265,19 @@ export function PdfUploadForm() {
 
 function StepIndicator({ activeStep }: Readonly<{ activeStep: number }>) {
   return (
-    <div className="border-y border-slate-200 py-4">
-      <div className="grid gap-2 sm:grid-cols-4 sm:gap-3">
+    <div className="rounded-[18px] border border-slate-200 bg-white px-4 py-5 sm:px-6">
+      <div className="grid gap-4 sm:grid-cols-4 sm:gap-0">
         {steps.map((step, index) => {
           const stepNumber = index + 1;
           const active = stepNumber <= activeStep;
-          return <div key={step} className="flex items-center gap-3 rounded-md bg-white/60 px-2 py-1.5 sm:bg-transparent sm:px-0 sm:py-0"><span className={`grid h-8 w-8 place-items-center rounded-full font-mono text-xs ${active ? "bg-brand-primary text-white" : "bg-white text-slate-500 ring-1 ring-slate-200"}`}>{stepNumber}</span><span className={`text-sm ${active ? "font-semibold text-brand-ink" : "text-slate-500"}`}>{step}</span></div>;
+          return (
+            <div key={step} className="relative flex items-center gap-3 sm:flex-col sm:items-center sm:gap-2">
+              {index > 0 ? <span className="absolute left-4 top-[-1rem] h-4 w-px bg-slate-200 sm:left-0 sm:top-4 sm:h-px sm:w-1/2" /> : null}
+              {index < steps.length - 1 ? <span className="absolute bottom-[-1rem] left-4 h-4 w-px bg-slate-200 sm:left-1/2 sm:top-4 sm:h-px sm:w-1/2" /> : null}
+              <span className={`relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full border font-mono text-xs transition ${active ? "border-brand-primary bg-brand-primary text-white" : "border-slate-200 bg-white text-slate-500"}`}>{stepNumber}</span>
+              <span className={`text-sm sm:text-center ${active ? "font-semibold text-brand-ink" : "text-slate-500"}`}>{step}</span>
+            </div>
+          );
         })}
       </div>
     </div>

@@ -1,4 +1,4 @@
-# PRD — Arnol Works
+﻿# PRD â€” Arnol Works
 
 ## 1. Ringkasan produk
 
@@ -92,7 +92,7 @@ Untuk portfolio:
 Brand utama:
 
 - Nama: Arnol Works
-- Domain: arnol.web.id
+- Domain: arnol.my.id
 - Tagline English: Useful web tools and product experiments built by Arnol.
 - Tagline Indonesia: Kumpulan tools web dan eksperimen produk digital buatan Arnol.
 
@@ -106,12 +106,12 @@ Tools pertama:
 
 Routes MVP:
 
-- `/` — homepage Arnol Works.
-- `/tools` — daftar tools.
-- `/tools/pdf-color-bw-splitter` — tools pertama.
-- `/projects` — portfolio/project list placeholder.
-- `/about` — tentang Arnol placeholder.
-- `/contact` — kontak placeholder.
+- `/` â€” homepage Arnol Works.
+- `/tools` â€” daftar tools.
+- `/tools/pdf-color-bw-splitter` â€” tools pertama.
+- `/projects` â€” portfolio/project list placeholder.
+- `/about` â€” tentang Arnol placeholder.
+- `/contact` â€” kontak placeholder.
 
 Routes backend MVP:
 
@@ -133,7 +133,7 @@ Routes backend MVP:
 7. Halaman terdeteksi warna otomatis terpilih.
 8. User review dan ubah pilihan.
 9. User bisa memasukkan nomor halaman manual seperti `1, 3, 8-12, 20`.
-10. User klik “Pisahkan PDF”.
+10. User klik â€œPisahkan PDFâ€.
 11. Frontend mengirim selectedColorPages ke backend split endpoint.
 12. Backend membuat dua output PDF.
 13. User download file warna dan file hitam-putih.
@@ -198,7 +198,7 @@ Routes backend MVP:
 
 ## 13. Success metrics MVP
 
-- User bisa menyelesaikan flow upload → analyze → review → split → download.
+- User bisa menyelesaikan flow upload â†’ analyze â†’ review â†’ split â†’ download.
 - PDF output tetap mempertahankan layout asli.
 - User bisa mengoreksi halaman warna secara manual.
 - Codex bisa melanjutkan development dari dokumen ini tanpa kebingungan.

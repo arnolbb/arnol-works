@@ -21,8 +21,8 @@ export function SiteFooter() {
           <div>
             <h3 className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500">Kontak</h3>
             <div className="mt-4 grid gap-3 text-sm text-slate-700">
-              <span>arnol.web.id</span>
-              <span>hello@arnol.web.id</span>
+              <span>arnol.my.id</span>
+              <span>hello@arnol.my.id</span>
               <Link href="/contact" className="hover:text-brand-ink">Kirim feedback</Link>
             </div>
           </div>
