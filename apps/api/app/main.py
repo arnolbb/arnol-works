@@ -1,0 +1,43 @@
+﻿from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+
+from app.routes.pdf import router as pdf_router
+from app.services.storage import cleanup_old_jobs
+
+app = FastAPI(
+    title="Arnol Works API",
+    description="Backend API for Arnol Works portfolio and multi-tools platform.",
+    version="0.1.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
+    if isinstance(exc.detail, dict) and "error" in exc.detail:
+        return JSONResponse(status_code=exc.status_code, content=exc.detail)
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"error": {"code": "PROCESSING_FAILED", "message": str(exc.detail), "details": None}},
+    )
+
+
+app.include_router(pdf_router)
+
+
+@app.on_event("startup")
+def on_startup() -> None:
+    cleanup_old_jobs()
+
+
+@app.get("/health")
+def health() -> dict[str, str]:
+    return {"status": "ok", "service": "arnol-works-api"}
