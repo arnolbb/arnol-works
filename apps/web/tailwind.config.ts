@@ -1,6 +1,7 @@
 ﻿import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
   theme: {
     extend: {
@@ -13,6 +14,11 @@ const config: Config = {
           ink: "#0D1C2E",
           muted: "#475569",
           paper: "#FBFAF8",
+          night: "#0A1020",
+          panel: "#111827",
+          line: "#233047",
+          amber: "#F59E0B",
+          mint: "#10B981",
         },
       },
       boxShadow: {

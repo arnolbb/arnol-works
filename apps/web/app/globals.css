@@ -6,6 +6,18 @@
   --font-heading: "Bahnschrift", "Aptos Display", "Segoe UI Variable Display", "Segoe UI", Arial, sans-serif;
   --font-body: "Aptos", "Segoe UI Variable Text", "Segoe UI", Arial, sans-serif;
   --font-mono: "Cascadia Mono", "JetBrains Mono", Consolas, monospace;
+  --page-bg: #f8fafc;
+  --page-grid: rgba(15, 23, 42, 0.055);
+  --page-glow-a: rgba(74, 62, 230, 0.14);
+  --page-glow-b: rgba(16, 185, 129, 0.10);
+}
+
+.dark {
+  color-scheme: dark;
+  --page-bg: #0a1020;
+  --page-grid: rgba(148, 163, 184, 0.09);
+  --page-glow-a: rgba(99, 102, 241, 0.22);
+  --page-glow-b: rgba(245, 158, 11, 0.12);
 }
 
 * {
@@ -18,9 +30,20 @@ html {
 
 body {
   margin: 0;
-  background: #fbfaf8;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 82% 8%, var(--page-glow-a), transparent 28rem),
+    radial-gradient(circle at 12% 70%, var(--page-glow-b), transparent 24rem),
+    linear-gradient(to right, var(--page-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--page-grid) 1px, transparent 1px),
+    var(--page-bg);
+  background-size: auto, auto, 40px 40px, 40px 40px, auto;
   color: #0d1c2e;
   font-family: var(--font-body);
+}
+
+.dark body {
+  color: #e5edf8;
 }
 
 h1,
@@ -39,4 +62,9 @@ h6 {
 ::selection {
   background: #e2dfff;
   color: #0d1c2e;
+}
+
+.dark ::selection {
+  background: #4a3ee6;
+  color: #ffffff;
 }

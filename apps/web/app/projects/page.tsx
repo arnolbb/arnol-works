@@ -10,18 +10,18 @@ const projects = [
 export default function ProjectsPage() {
   return (
     <PageShell>
-      <section className="rounded-[28px] border border-slate-200 bg-white p-7 sm:p-10">
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500">Projects</p>
-        <h1 className="mt-5 text-4xl font-semibold tracking-[-0.03em] text-brand-ink">Project yang sedang dibangun</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Arnol Works bukan hanya landing page. Ini adalah ruang untuk merilis tools kecil, mencatat proses, dan memperlihatkan progress produk dari ide sampai bisa dipakai.</p>
+      <section className="rounded-[28px] border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel p-7 sm:p-10">
+        <p className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Projects</p>
+        <h1 className="mt-5 text-4xl font-semibold tracking-[-0.03em] text-brand-ink dark:text-slate-100">Project yang sedang dibangun</h1>
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-400">Arnol Works bukan hanya landing page. Ini adalah ruang untuk merilis tools kecil, mencatat proses, dan memperlihatkan progress produk dari ide sampai bisa dipakai.</p>
       </section>
       <section className="mt-8 grid gap-5 md:grid-cols-3">
         {projects.map((item) => (
-          <article key={item.title} className="rounded-[22px] border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-slate-300">
+          <article key={item.title} className="rounded-[22px] border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel p-6 transition hover:-translate-y-1 hover:border-slate-300 dark:border-slate-600">
             <div className="flex items-start justify-between gap-4"><span className="rounded-full border border-brand-border bg-brand-soft px-3 py-1 font-mono text-[10px] uppercase tracking-wide text-brand-primary">{item.status}</span><span className="h-2.5 w-2.5 rounded-full bg-emerald-400" /></div>
-            <h2 className="mt-8 text-xl font-semibold tracking-[-0.02em] text-brand-ink">{item.title}</h2>
-            <p className="mt-3 min-h-24 text-sm leading-7 text-slate-600">{item.description}</p>
-            <p className="mt-5 border-t border-slate-200 pt-4 font-mono text-xs text-slate-500">{item.meta}</p>
+            <h2 className="mt-8 text-xl font-semibold tracking-[-0.02em] text-brand-ink dark:text-slate-100">{item.title}</h2>
+            <p className="mt-3 min-h-24 text-sm leading-7 text-slate-600 dark:text-slate-400">{item.description}</p>
+            <p className="mt-5 border-t border-slate-200 dark:border-brand-line pt-4 font-mono text-xs text-slate-500 dark:text-slate-400">{item.meta}</p>
             <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-brand-primary">Lihat detail →</Link>
           </article>
         ))}

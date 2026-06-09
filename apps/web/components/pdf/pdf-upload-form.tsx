@@ -135,28 +135,28 @@ export function PdfUploadForm() {
       <StepIndicator activeStep={activeStep} />
 
       {!splitResult ? (
-        <section className="rounded-[18px] border border-slate-200 bg-white p-5 sm:p-7">
+        <section className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel p-5 sm:p-7">
           {!selectedFile ? (
-            <label onDragOver={(event) => event.preventDefault()} onDrop={handleDrop} className="group flex cursor-pointer flex-col items-center justify-center rounded-[18px] border border-dashed border-slate-300 bg-white px-5 py-9 text-center transition hover:border-brand-primary sm:px-6 sm:py-12">
+            <label onDragOver={(event) => event.preventDefault()} onDrop={handleDrop} className="group flex cursor-pointer flex-col items-center justify-center rounded-[18px] border border-dashed border-slate-300 dark:border-slate-600 bg-white dark:bg-brand-panel px-5 py-9 text-center transition hover:border-brand-primary sm:px-6 sm:py-12">
               <span className="grid h-12 w-12 place-items-center rounded-full bg-brand-soft text-xl text-brand-primary">PDF</span>
-              <span className="mt-4 text-xl font-medium text-brand-ink">Upload file PDF Anda</span>
-              <span className="mt-2 max-w-md text-sm leading-6 text-slate-600">Tarik & lepas satu file PDF di sini atau klik untuk memilih file.</span>
+              <span className="mt-4 text-xl font-medium text-brand-ink dark:text-slate-100">Upload file PDF Anda</span>
+              <span className="mt-2 max-w-md text-sm leading-6 text-slate-600 dark:text-slate-400">Tarik & lepas satu file PDF di sini atau klik untuk memilih file.</span>
               <span className="mt-5 rounded-md bg-brand-primary px-6 py-3 text-sm font-semibold text-white transition group-hover:bg-brand-hover">Pilih File PDF</span>
-              <span className="mt-3 font-mono text-xs uppercase tracking-[0.18em] text-slate-500">Maksimal ukuran file 50MB</span>
+              <span className="mt-3 font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Maksimal ukuran file 50MB</span>
               <input type="file" accept="application/pdf,.pdf" className="sr-only" onChange={handleFileChange} aria-label="Pilih file PDF" />
             </label>
           ) : (
-            <div className="rounded-[18px] border border-slate-200 bg-brand-paper p-5 sm:p-6">
+            <div className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-brand-paper dark:bg-brand-night p-5 sm:p-6">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-slate-200 bg-white font-mono text-xs font-semibold text-brand-primary">PDF</div>
+                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel font-mono text-xs font-semibold text-brand-primary">PDF</div>
                   <div>
-                    <p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-500">File aktif</p>
-                    <p className="mt-2 break-all text-lg font-medium text-brand-ink">{selectedFile.name}</p>
-                    <p className="mt-1 text-sm text-slate-600">{formatFileSize(selectedFile.size)} · satu file PDF siap dianalisis</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">File aktif</p>
+                    <p className="mt-2 break-all text-lg font-medium text-brand-ink dark:text-slate-100">{selectedFile.name}</p>
+                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{formatFileSize(selectedFile.size)} · satu file PDF siap dianalisis</p>
                   </div>
                 </div>
-                <label className="inline-flex cursor-pointer justify-center rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-brand-ink transition hover:bg-brand-paper">
+                <label className="inline-flex cursor-pointer justify-center rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-brand-panel px-4 py-2.5 text-sm font-semibold text-brand-ink dark:text-slate-100 transition hover:bg-brand-paper dark:hover:bg-slate-800 dark:bg-brand-night">
                   Ganti File
                   <input type="file" accept="application/pdf,.pdf" className="sr-only" onChange={handleFileChange} aria-label="Ganti file PDF" />
                 </label>
@@ -165,25 +165,25 @@ export function PdfUploadForm() {
           )}
 
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {trustBadges.map((badge) => <div key={badge} className="rounded-lg border border-slate-200 bg-brand-paper p-3 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-slate-600">{badge}</div>)}
+            {trustBadges.map((badge) => <div key={badge} className="rounded-lg border border-slate-200 dark:border-brand-line bg-brand-paper dark:bg-brand-night p-3 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-slate-600 dark:text-slate-400">{badge}</div>)}
           </div>
 
           {error ? <StatusCard tone="error" title="Terjadi kendala" text={error} /> : null}
           {status === "analyzing" ? <StatusCard tone="info" title="Menganalisis PDF" text="Kami sedang mencari halaman yang kemungkinan berwarna dan membuat preview halaman." /> : null}
 
-          <button type="button" aria-busy={status === "analyzing"} disabled={!selectedFile || status === "analyzing" || status === "splitting"} onClick={handleAnalyze} className="mt-6 w-full rounded-md bg-black px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500">
+          <button type="button" aria-busy={status === "analyzing"} disabled={!selectedFile || status === "analyzing" || status === "splitting"} onClick={handleAnalyze} className="mt-6 w-full rounded-md bg-black px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500 dark:text-slate-400">
             {status === "analyzing" ? "Sedang menganalisis PDF..." : "Analisis PDF"}
           </button>
         </section>
       ) : null}
       {analyzeResult && !splitResult ? (
         <section className="space-y-6">
-          <div className="rounded-[18px] border border-slate-200 bg-white p-5">
+          <div className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel p-5">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500">Review Halaman</p>
-                <h2 className="mt-2 text-2xl font-medium tracking-[-0.02em] text-brand-ink">Cek hasil deteksi sebelum split</h2>
-                <p className="mt-1 text-sm leading-6 text-slate-600">Deteksi otomatis hanya rekomendasi. Pilihan akhir tetap mengikuti halaman yang Anda centang.</p>
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Review Halaman</p>
+                <h2 className="mt-2 text-2xl font-medium tracking-[-0.02em] text-brand-ink dark:text-slate-100">Cek hasil deteksi sebelum split</h2>
+                <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">Deteksi otomatis hanya rekomendasi. Pilihan akhir tetap mengikuti halaman yang Anda centang.</p>
               </div>
               <div className="rounded-full border border-brand-border bg-brand-soft px-4 py-2 text-sm font-semibold text-brand-primary">
                 {selectedPages.size} halaman dipilih
@@ -193,33 +193,33 @@ export function PdfUploadForm() {
 
           <div className="grid gap-7 lg:grid-cols-[320px_1fr]">
             <aside className="space-y-5 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto lg:pr-2">
-              <div className="rounded-[18px] border border-slate-200 bg-white p-6">
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500">Ringkasan Analisis</p>
+              <div className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel p-6">
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Ringkasan Analisis</p>
                 <div className="mt-5 divide-y divide-slate-200">
                   <Summary label="Total Halaman" value={analyzeResult.totalPages} />
                   <Summary label="Terdeteksi Berwarna" value={analyzeResult.detectedColorPages.length} accent />
                   <Summary label="Dipilih Berwarna" value={selectedPages.size} accent />
                 </div>
-                <div className="mt-5 rounded-md border border-slate-200 bg-brand-paper p-4 text-sm leading-6 text-slate-600">
-                  Halaman yang dipilih masuk ke file <strong className="font-semibold text-brand-ink">PDF berwarna</strong>. Sisanya masuk ke file hitam putih. Panel ini bisa discroll saat halaman PDF banyak.
+                <div className="mt-5 rounded-md border border-slate-200 dark:border-brand-line bg-brand-paper dark:bg-brand-night p-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                  Halaman yang dipilih masuk ke file <strong className="font-semibold text-brand-ink dark:text-slate-100">PDF berwarna</strong>. Sisanya masuk ke file hitam putih. Panel ini bisa discroll saat halaman PDF banyak.
                 </div>
               </div>
 
-              <div className="rounded-[18px] border border-slate-200 bg-white p-6">
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500">Input Rentang Manual</p>
+              <div className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel p-6">
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Input Rentang Manual</p>
                 <div className="mt-5">
-                  <label htmlFor="page-range-input" className="mb-2 block text-sm font-medium text-brand-ink">Nomor halaman warna</label>
-                  <input id="page-range-input" value={rangeInput} onChange={(event) => setRangeInput(event.target.value)} placeholder="Contoh: 1, 3, 8-12" className="h-12 w-full rounded-md border border-slate-200 px-4 font-mono text-sm outline-none transition focus:border-brand-primary" />
+                  <label htmlFor="page-range-input" className="mb-2 block text-sm font-medium text-brand-ink dark:text-slate-100">Nomor halaman warna</label>
+                  <input id="page-range-input" value={rangeInput} onChange={(event) => setRangeInput(event.target.value)} placeholder="Contoh: 1, 3, 8-12" className="h-12 w-full rounded-md border border-slate-200 dark:border-brand-line px-4 font-mono text-sm outline-none transition focus:border-brand-primary" />
                 </div>
                 <button type="button" onClick={applyRangeInput} className="mt-3 w-full rounded-md bg-brand-primary px-4 py-3 text-sm font-semibold text-white hover:bg-brand-hover">Terapkan Rentang</button>
                 <div className="mt-4 grid grid-cols-2 gap-3">
-                  <button type="button" onClick={() => setSelectedPages(new Set(analyzeResult.pages.map((page) => page.pageNumber)))} className="rounded-md border border-slate-200 bg-white px-4 py-3 text-xs font-semibold uppercase tracking-wide text-brand-ink hover:bg-brand-paper">Pilih Semua</button>
-                  <button type="button" onClick={() => setSelectedPages(new Set())} className="rounded-md border border-slate-200 bg-white px-4 py-3 text-xs font-semibold uppercase tracking-wide text-brand-ink hover:bg-brand-paper">Hapus Semua</button>
+                  <button type="button" onClick={() => setSelectedPages(new Set(analyzeResult.pages.map((page) => page.pageNumber)))} className="rounded-md border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel px-4 py-3 text-xs font-semibold uppercase tracking-wide text-brand-ink dark:text-slate-100 hover:bg-brand-paper dark:hover:bg-slate-800 dark:bg-brand-night">Pilih Semua</button>
+                  <button type="button" onClick={() => setSelectedPages(new Set())} className="rounded-md border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel px-4 py-3 text-xs font-semibold uppercase tracking-wide text-brand-ink dark:text-slate-100 hover:bg-brand-paper dark:hover:bg-slate-800 dark:bg-brand-night">Hapus Semua</button>
                 </div>
                 <button type="button" onClick={() => setSelectedPages(new Set(analyzeResult.detectedColorPages))} className="mt-3 w-full rounded-md border border-brand-border bg-brand-soft px-4 py-3 text-sm font-semibold text-brand-primary hover:border-brand-primary">Gunakan Hasil Deteksi</button>
-                <div className="sticky bottom-0 -mx-6 mt-5 border-t border-slate-200 bg-white/95 px-6 pb-1 pt-4 backdrop-blur">
+                <div className="sticky bottom-0 -mx-6 mt-5 border-t border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel/95 px-6 pb-1 pt-4 backdrop-blur">
                   <button type="button" aria-busy={status === "splitting"} disabled={status === "splitting"} onClick={handleSplit} className="w-full rounded-md bg-black px-5 py-4 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300">{status === "splitting" ? "Memproses..." : "Proses Split"}</button>
-                  <p className="mt-2 text-center text-xs text-slate-500">Pastikan pilihan halaman sudah sesuai.</p>
+                  <p className="mt-2 text-center text-xs text-slate-500 dark:text-slate-400">Pastikan pilihan halaman sudah sesuai.</p>
                 </div>
               </div>
             </aside>
@@ -227,25 +227,25 @@ export function PdfUploadForm() {
             <div>
               <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <h3 className="text-xl font-medium tracking-[-0.02em] text-brand-ink">Pratinjau Halaman</h3>
-                  <p className="mt-1 text-sm text-slate-600">Klik kartu halaman untuk memilih atau menghapus dari file warna.</p>
+                  <h3 className="text-xl font-medium tracking-[-0.02em] text-brand-ink dark:text-slate-100">Pratinjau Halaman</h3>
+                  <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Klik kartu halaman untuk memilih atau menghapus dari file warna.</p>
                 </div>
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">{analyzeResult.pages.length} halaman</p>
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{analyzeResult.pages.length} halaman</p>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {analyzeResult.pages.map((page) => {
                   const isSelected = selectedPages.has(page.pageNumber);
                   return (
-                    <label key={page.pageNumber} aria-label={`Halaman ${page.pageNumber}, ${isSelected ? "masuk PDF warna" : "masuk PDF hitam putih"}`} className={`group overflow-hidden rounded-[14px] border bg-white transition hover:-translate-y-0.5 ${isSelected ? "border-brand-primary ring-1 ring-brand-soft" : "border-slate-200 hover:border-slate-400"}`}>
-                      <div className={`relative border-b border-slate-200 ${isSelected ? "bg-brand-soft" : "bg-slate-50"}`}>
+                    <label key={page.pageNumber} aria-label={`Halaman ${page.pageNumber}, ${isSelected ? "masuk PDF warna" : "masuk PDF hitam putih"}`} className={`group overflow-hidden rounded-[14px] border bg-white dark:bg-brand-panel transition hover:-translate-y-0.5 ${isSelected ? "border-brand-primary ring-1 ring-brand-soft" : "border-slate-200 dark:border-brand-line hover:border-slate-400"}`}>
+                      <div className={`relative border-b border-slate-200 dark:border-brand-line ${isSelected ? "bg-brand-soft" : "bg-slate-50 dark:bg-slate-900"}`}>
                         <Image src={fileUrl(page.thumbnailUrl) ?? ""} alt={`Preview halaman ${page.pageNumber}`} width={360} height={480} className="h-48 w-full bg-white object-contain sm:h-52" unoptimized />
                         {page.isColorDetected ? <span className="absolute bottom-2 left-2 rounded-md bg-brand-primary px-2 py-1 font-mono text-[10px] uppercase tracking-wide text-white">Warna</span> : null}
-                        <span aria-hidden="true" className={`absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-full border text-xs font-semibold transition ${isSelected ? "border-brand-primary bg-brand-primary text-white" : "border-slate-200 bg-white/90 text-transparent group-hover:border-slate-400"}`}>{isSelected ? "✓" : ""}</span>
+                        <span aria-hidden="true" className={`absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-full border text-xs font-semibold transition ${isSelected ? "border-brand-primary bg-brand-primary text-white" : "border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel/90 text-transparent group-hover:border-slate-400"}`}>{isSelected ? "✓" : ""}</span>
                       </div>
                       <div className="flex items-center justify-between gap-3 p-3">
                         <div>
-                          <p className="font-mono text-xs text-brand-ink">Hal. {page.pageNumber}</p>
-                          <p className={`mt-1 text-xs ${isSelected ? "font-medium text-brand-primary" : "text-slate-500"}`}>{isSelected ? "Masuk PDF warna" : "Masuk PDF hitam putih"}</p>
+                          <p className="font-mono text-xs text-brand-ink dark:text-slate-100">Hal. {page.pageNumber}</p>
+                          <p className={`mt-1 text-xs ${isSelected ? "font-medium text-brand-primary" : "text-slate-500 dark:text-slate-400"}`}>{isSelected ? "Masuk PDF warna" : "Masuk PDF hitam putih"}</p>
                         </div>
                         <input type="checkbox" checked={isSelected} onChange={() => togglePage(page.pageNumber)} className="sr-only" />
                       </div>
@@ -265,7 +265,7 @@ export function PdfUploadForm() {
 
 function StepIndicator({ activeStep }: Readonly<{ activeStep: number }>) {
   return (
-    <div className="rounded-[18px] border border-slate-200 bg-white px-4 py-5 sm:px-6">
+    <div className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel px-4 py-5 sm:px-6">
       <div className="grid gap-4 sm:grid-cols-4 sm:gap-0">
         {steps.map((step, index) => {
           const stepNumber = index + 1;
@@ -274,8 +274,8 @@ function StepIndicator({ activeStep }: Readonly<{ activeStep: number }>) {
             <div key={step} className="relative flex items-center gap-3 sm:flex-col sm:items-center sm:gap-2">
               {index > 0 ? <span className="absolute left-4 top-[-1rem] h-4 w-px bg-slate-200 sm:left-0 sm:top-4 sm:h-px sm:w-1/2" /> : null}
               {index < steps.length - 1 ? <span className="absolute bottom-[-1rem] left-4 h-4 w-px bg-slate-200 sm:left-1/2 sm:top-4 sm:h-px sm:w-1/2" /> : null}
-              <span className={`relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full border font-mono text-xs transition ${active ? "border-brand-primary bg-brand-primary text-white" : "border-slate-200 bg-white text-slate-500"}`}>{stepNumber}</span>
-              <span className={`text-sm sm:text-center ${active ? "font-semibold text-brand-ink" : "text-slate-500"}`}>{step}</span>
+              <span className={`relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full border font-mono text-xs transition ${active ? "border-brand-primary bg-brand-primary text-white" : "border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel text-slate-500 dark:text-slate-400"}`}>{stepNumber}</span>
+              <span className={`text-sm sm:text-center ${active ? "font-semibold text-brand-ink dark:text-slate-100" : "text-slate-500 dark:text-slate-400"}`}>{step}</span>
             </div>
           );
         })}
@@ -285,22 +285,22 @@ function StepIndicator({ activeStep }: Readonly<{ activeStep: number }>) {
 }
 
 function StatusCard({ tone, title, text }: Readonly<{ tone: "success" | "error" | "info"; title: string; text: string }>) {
-  const styles = { success: "border-emerald-200 bg-emerald-50 text-emerald-800", error: "border-red-200 bg-red-50 text-red-700", info: "border-slate-200 bg-brand-paper text-brand-ink" }[tone];
-  return <div className={`mt-5 rounded-md border p-4 text-sm ${styles}`}><div className="flex items-start gap-3"><span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand-primary" /><div><p className="font-semibold">{title}</p><p className="mt-1 break-all text-slate-600">{text}</p></div></div></div>;
+  const styles = { success: "border-emerald-200 bg-emerald-50 text-emerald-800", error: "border-red-200 bg-red-50 text-red-700", info: "border-slate-200 dark:border-brand-line bg-brand-paper dark:bg-brand-night text-brand-ink dark:text-slate-100" }[tone];
+  return <div className={`mt-5 rounded-md border p-4 text-sm ${styles}`}><div className="flex items-start gap-3"><span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand-primary" /><div><p className="font-semibold">{title}</p><p className="mt-1 break-all text-slate-600 dark:text-slate-400">{text}</p></div></div></div>;
 }
 
 function Summary({ label, value, accent = false }: Readonly<{ label: string; value: number; accent?: boolean }>) {
-  return <div className="flex items-center justify-between py-3"><p className="text-sm text-slate-600">{label}</p><p className={`text-xl font-semibold ${accent ? "text-brand-primary" : "text-brand-ink"}`}>{value}</p></div>;
+  return <div className="flex items-center justify-between py-3"><p className="text-sm text-slate-600 dark:text-slate-400">{label}</p><p className={`text-xl font-semibold ${accent ? "text-brand-primary" : "text-brand-ink dark:text-slate-100"}`}>{value}</p></div>;
 }
 
 function ProcessingCard() {
   return (
-    <div className="rounded-[18px] border border-slate-200 bg-white p-6 text-center sm:p-8">
+    <div className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel p-6 text-center sm:p-8">
       <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand-soft">
         <span className="h-5 w-5 animate-spin rounded-full border-2 border-brand-primary border-t-transparent" />
       </div>
-      <h2 className="mt-4 text-2xl font-medium text-brand-ink">Memproses PDF...</h2>
-      <p className="mt-2 text-sm leading-6 text-slate-600 sm:text-base">Kami sedang membuat file halaman berwarna dan hitam-putih. Tetap buka halaman ini sampai proses selesai.</p>
+      <h2 className="mt-4 text-2xl font-medium text-brand-ink dark:text-slate-100">Memproses PDF...</h2>
+      <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400 sm:text-base">Kami sedang membuat file halaman berwarna dan hitam-putih. Tetap buka halaman ini sampai proses selesai.</p>
     </div>
   );
 }
@@ -309,17 +309,17 @@ function ResultCard({ result, resetFlow }: Readonly<{ result: SplitResult; reset
   const totalPages = result.colorPageCount + result.bwPageCount;
 
   return (
-    <section className="rounded-[18px] border border-slate-200 bg-white p-5 sm:p-7">
-      <div className="flex flex-col gap-4 border-b border-slate-200 pb-5 sm:flex-row sm:items-center sm:justify-between">
+    <section className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel p-5 sm:p-7">
+      <div className="flex flex-col gap-4 border-b border-slate-200 dark:border-brand-line pb-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-4">
           <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-emerald-500 text-lg text-white">✓</div>
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-emerald-700">Selesai</p>
-            <h2 className="mt-1 text-2xl font-medium tracking-[-0.02em] text-brand-ink">File berhasil dipisahkan</h2>
-            <p className="mt-1 text-sm leading-6 text-slate-600">Total {totalPages} halaman sudah dibagi menjadi file warna dan hitam putih.</p>
+            <h2 className="mt-1 text-2xl font-medium tracking-[-0.02em] text-brand-ink dark:text-slate-100">File berhasil dipisahkan</h2>
+            <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">Total {totalPages} halaman sudah dibagi menjadi file warna dan hitam putih.</p>
           </div>
         </div>
-        <button type="button" onClick={resetFlow} className="rounded-md border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-brand-ink hover:bg-brand-paper">
+        <button type="button" onClick={resetFlow} className="rounded-md border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel px-4 py-2.5 text-sm font-semibold text-brand-ink dark:text-slate-100 hover:bg-brand-paper dark:hover:bg-slate-800 dark:bg-brand-night">
           Proses PDF Lain
         </button>
       </div>
@@ -330,12 +330,12 @@ function ResultCard({ result, resetFlow }: Readonly<{ result: SplitResult; reset
       </div>
 
       <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1.15fr]">
-        <div className="rounded-[14px] border border-slate-200 bg-brand-paper p-5">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">Ringkasan</p>
-          <div className="mt-4 divide-y divide-slate-200 text-sm text-slate-700">
-            <p className="flex justify-between gap-4 py-2"><span>Total Halaman</span><strong className="font-semibold text-brand-ink">{totalPages}</strong></p>
+        <div className="rounded-[14px] border border-slate-200 dark:border-brand-line bg-brand-paper dark:bg-brand-night p-5">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Ringkasan</p>
+          <div className="mt-4 divide-y divide-slate-200 text-sm text-slate-700 dark:text-slate-300">
+            <p className="flex justify-between gap-4 py-2"><span>Total Halaman</span><strong className="font-semibold text-brand-ink dark:text-slate-100">{totalPages}</strong></p>
             <p className="flex justify-between gap-4 py-2"><span>Halaman Berwarna</span><strong className="font-semibold text-brand-primary">{result.colorPageCount}</strong></p>
-            <p className="flex justify-between gap-4 py-2"><span>Halaman Hitam Putih</span><strong className="font-semibold text-brand-ink">{result.bwPageCount}</strong></p>
+            <p className="flex justify-between gap-4 py-2"><span>Halaman Hitam Putih</span><strong className="font-semibold text-brand-ink dark:text-slate-100">{result.bwPageCount}</strong></p>
           </div>
         </div>
         <div className="rounded-[14px] border border-emerald-200 bg-emerald-50 p-5">
@@ -345,9 +345,9 @@ function ResultCard({ result, resetFlow }: Readonly<{ result: SplitResult; reset
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-slate-500">File akan dihapus otomatis untuk menjaga privasi Anda.</p>
-        <Link href="/tools" className="rounded-md border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-semibold text-brand-ink hover:bg-brand-paper">Kembali ke Tools</Link>
+      <div className="mt-5 flex flex-col gap-3 border-t border-slate-200 dark:border-brand-line pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs text-slate-500 dark:text-slate-400">File akan dihapus otomatis untuk menjaga privasi Anda.</p>
+        <Link href="/tools" className="rounded-md border border-slate-200 dark:border-brand-line bg-white dark:bg-brand-panel px-4 py-2.5 text-center text-sm font-semibold text-brand-ink dark:text-slate-100 hover:bg-brand-paper dark:hover:bg-slate-800 dark:bg-brand-night">Kembali ke Tools</Link>
       </div>
     </section>
   );
@@ -355,13 +355,13 @@ function ResultCard({ result, resetFlow }: Readonly<{ result: SplitResult; reset
 
 function DownloadCard({ title, count, href, variant }: Readonly<{ title: string; count: number; href: string; variant: "color" | "bw" }>) {
   return (
-    <div className={`rounded-[14px] border bg-white p-5 ${variant === "color" ? "border-brand-primary" : "border-slate-200"}`}>
+    <div className={`rounded-[14px] border bg-white dark:bg-brand-panel p-5 ${variant === "color" ? "border-brand-primary" : "border-slate-200 dark:border-brand-line"}`}>
       <div className="flex items-start gap-4">
         <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-primary">{variant === "color" ? "?" : "?"}</div>
         <div className="min-w-0">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">Output PDF</p>
-          <h3 className="mt-1 text-lg font-medium text-brand-ink">{title}</h3>
-          <p className="mt-1 text-sm text-slate-600">{count} halaman siap diunduh</p>
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Output PDF</p>
+          <h3 className="mt-1 text-lg font-medium text-brand-ink dark:text-slate-100">{title}</h3>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{count} halaman siap diunduh</p>
         </div>
       </div>
       <a href={fileUrl(href) ?? "#"} className={`mt-5 inline-flex w-full justify-center rounded-md px-5 py-3 text-sm font-semibold text-white ${variant === "color" ? "bg-brand-primary hover:bg-brand-hover" : "bg-black hover:bg-slate-800"}`}>Unduh PDF</a>
@@ -371,10 +371,10 @@ function DownloadCard({ title, count, href, variant }: Readonly<{ title: string;
 
 function EmptyOutputCard({ title }: Readonly<{ title: string }>) {
   return (
-    <div className="rounded-[14px] border border-dashed border-slate-300 bg-brand-paper p-5">
-      <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">Tidak dibuat</p>
-      <h3 className="mt-2 text-lg font-medium text-slate-500">{title}</h3>
-      <p className="mt-2 text-sm leading-6 text-slate-500">Tidak ada halaman untuk kategori ini.</p>
+    <div className="rounded-[14px] border border-dashed border-slate-300 dark:border-slate-600 bg-brand-paper dark:bg-brand-night p-5">
+      <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Tidak dibuat</p>
+      <h3 className="mt-2 text-lg font-medium text-slate-500 dark:text-slate-400">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">Tidak ada halaman untuk kategori ini.</p>
     </div>
   );
 }
