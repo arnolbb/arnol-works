@@ -1,4 +1,4 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
+﻿export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
 export type AnalyzePage = {
   pageNumber: number;
@@ -21,6 +21,18 @@ export type SplitResult = {
   bwPageCount: number;
 };
 
+export type ToolProcessResult = {
+  jobId: string;
+  downloadUrl: string;
+  originalSize?: number;
+  outputSize?: number;
+  reductionPercent?: number;
+  fileCount?: number;
+  imageCount?: number;
+  totalPages?: number;
+  pageCount?: number;
+};
+
 type ApiErrorPayload = { error?: { message?: string } };
 
 async function parseApiError(response: Response) {
@@ -35,6 +47,25 @@ async function parseApiError(response: Response) {
 export function fileUrl(path: string | null) {
   if (!path) return null;
   return `${API_BASE_URL}${path}`;
+}
+
+async function postFiles(endpoint: string, files: File[], fieldName = "file", extraFields?: Record<string, string>): Promise<ToolProcessResult> {
+  const formData = new FormData();
+  for (const file of files) {
+    formData.append(fieldName, file);
+  }
+  for (const [key, value] of Object.entries(extraFields ?? {})) {
+    formData.append(key, value);
+  }
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, { method: "POST", body: formData });
+  if (!response.ok) {
+    throw new Error(await parseApiError(response));
+  }
+  return response.json();
+}
+
+export async function processTool(endpoint: string, files: File[], multiple = false, extraFields?: Record<string, string>): Promise<ToolProcessResult> {
+  return postFiles(endpoint, files, multiple ? "files" : "file", extraFields);
 }
 
 export async function analyzePdf(file: File): Promise<AnalyzeResult> {
@@ -58,3 +89,5 @@ export async function splitPdf(jobId: string, selectedColorPages: number[]): Pro
   }
   return response.json();
 }
+
+

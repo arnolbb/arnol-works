@@ -1,16 +1,18 @@
 ﻿import Link from "next/link";
 import { Container } from "@/components/page-shell";
-import { tools } from "@/lib/tools-registry";
+import { getAvailableTools, tools } from "@/lib/tools-registry";
 
-const features = ["Deteksi halaman warna", "Review & pilih manual", "Download dua PDF hasil split"];
+const features = ["PDF tools", "Image tools", "Download instan"];
 const timeline = [
-  { label: "MVP", text: "PDF splitter sudah bisa dipakai", tone: "emerald" },
-  { label: "Polish", text: "UI review halaman dirapikan", tone: "indigo" },
-  { label: "Next", text: "Deploy dan tambah tools baru", tone: "amber" },
+  { label: "Aktif", text: "7 tools siap dipakai", tone: "emerald" },
+  { label: "Dokumen", text: "PDF split, compress, merge, convert", tone: "indigo" },
+  { label: "Gambar", text: "Compress, resize, dan image to PDF", tone: "amber" },
 ];
 
 export default function HomePage() {
-  const visibleTools = tools.slice(0, 4);
+  const activeTools = getAvailableTools();
+  const plannedTools = tools.length - activeTools.length;
+  const visibleTools = activeTools.slice(0, 4);
 
   return (
     <>
@@ -25,16 +27,16 @@ export default function HomePage() {
                 Saya membangun tools web sederhana yang benar-benar bisa dipakai.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400">
-                Arnol Works adalah ruang kerja digital untuk tools kecil, mini product, dan catatan build yang berangkat dari masalah nyata sehari-hari.
+                Arnol Works adalah ruang kerja digital berisi utilitas PDF dan gambar untuk kebutuhan dokumen harian: kompres, gabung, konversi, resize, dan split file.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href="/tools" className="inline-flex justify-center rounded-md bg-black px-7 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-white dark:text-brand-night dark:hover:bg-slate-200">Lihat Tools</Link>
                 <Link href="/projects" className="inline-flex justify-center rounded-md border border-slate-300 bg-white px-7 py-3 text-sm font-semibold text-brand-ink transition hover:border-slate-500 dark:border-brand-line dark:bg-brand-panel/80 dark:text-slate-100 dark:hover:border-slate-500 dark:hover:bg-slate-800">Lihat Project</Link>
               </div>
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                <Metric label="Tool aktif" value="01" />
+                <Metric label="Tool aktif" value={String(activeTools.length).padStart(2, "0")} />
                 <Metric label="Stack" value="Next/FastAPI" />
-                <Metric label="Fokus" value="Utility" />
+                <Metric label="Fokus" value="PDF/Image" />
               </div>
             </div>
             <BuilderWorkspaceCard />
@@ -47,9 +49,9 @@ export default function HomePage() {
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">Latest Build</p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-brand-ink dark:text-slate-100">Pisah PDF Warna & Hitam Putih</h2>
+              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-brand-ink dark:text-slate-100">Tools dokumen harian sudah aktif</h2>
               <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
-                Build pertama ini dibuat untuk kasus sederhana: dokumen tebal sering punya sedikit halaman warna, tapi biaya print bisa ikut mahal jika tidak dipisahkan.
+                Arnol Works kini menyediakan beberapa tool praktis untuk PDF dan gambar: mulai dari split halaman warna, kompres PDF, gabung PDF, konversi JPG/PDF, sampai resize gambar.
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-3">
@@ -64,10 +66,10 @@ export default function HomePage() {
           <div className="mb-9 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Tools Shelf</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-brand-ink dark:text-slate-100">Tools yang sedang dibangun</h2>
+              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-brand-ink dark:text-slate-100">Tools yang sudah tersedia</h2>
               <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">Utilitas kecil untuk pekerjaan dokumen, gambar, dan workflow harian.</p>
             </div>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{tools.length} tools tersedia / direncanakan</p>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{activeTools.length} aktif / {plannedTools} direncanakan</p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {visibleTools.map((tool) => <HomeToolCard key={tool.id} tool={tool} />)}
@@ -120,8 +122,8 @@ function BuilderWorkspaceCard() {
       <div className="mt-5 rounded-2xl border border-brand-border bg-brand-soft p-5 dark:border-slate-700 dark:bg-slate-900/95">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-brand-primary dark:text-indigo-300">MVP selesai</p>
-            <h2 className="mt-3 text-2xl font-medium tracking-[-0.02em] text-brand-ink dark:text-slate-100">Pisah PDF Warna & Hitam Putih</h2>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-brand-primary dark:text-indigo-300">Tools aktif</p>
+            <h2 className="mt-3 text-2xl font-medium tracking-[-0.02em] text-brand-ink dark:text-slate-100">PDF & Image Toolkit</h2>
           </div>
           <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 font-mono text-[11px] uppercase tracking-wide text-emerald-700 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-300">Ready</span>
         </div>
@@ -159,7 +161,7 @@ function HomeToolCard({ tool }: Readonly<{ tool: (typeof tools)[number] }>) {
       <h3 className="mt-8 text-lg font-medium leading-7 tracking-[-0.02em] text-brand-ink dark:text-slate-100">{tool.title}</h3>
       <p className="mt-3 min-h-20 text-sm leading-6 text-slate-600 dark:text-slate-400">{tool.description}</p>
       <div className="mt-5 border-t border-slate-200 dark:border-brand-line pt-4">
-        {available ? <Link href={tool.href} className="text-sm font-medium text-brand-primary">Buka Tool →</Link> : <span className="text-sm text-slate-500 dark:text-slate-400">Masuk backlog build</span>}
+        {available ? <Link href={tool.href} className="text-sm font-medium text-brand-primary">Buka Tool →</Link> : <span className="text-sm text-slate-500 dark:text-slate-400">Direncanakan</span>}
       </div>
     </article>
   );
@@ -173,3 +175,5 @@ function NoteBlock({ title, children }: Readonly<{ title: string; children: Reac
     </div>
   );
 }
+
+
