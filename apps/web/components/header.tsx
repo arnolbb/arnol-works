@@ -32,7 +32,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200 bg-brand-paper/88 shadow-[0_1px_0_rgba(255,255,255,0.55)_inset] backdrop-blur-xl dark:border-brand-line dark:bg-brand-night/82 dark:shadow-[0_1px_0_rgba(255,255,255,0.04)_inset]">
+    <header className="sticky top-0 z-30 border-b border-slate-200 bg-brand-paper/90 shadow-[0_1px_0_rgba(255,255,255,0.55)_inset] backdrop-blur-xl dark:border-brand-line dark:bg-brand-night/80 dark:shadow-[0_1px_0_rgba(255,255,255,0.04)_inset]">
       <Container>
         <div className="flex min-h-14 items-center justify-between gap-4">
           <Link href="/" className="rounded-2xl py-2 transition hover:opacity-90" onClick={() => setIsOpen(false)} aria-label="Arnol Works Home">
@@ -76,3 +76,4 @@ export function SiteHeader() {
 }
 
 export const Header = SiteHeader;
+

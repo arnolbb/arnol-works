@@ -31,3 +31,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# local design assets
+LOGO Arnol Works.zip
+.tmp-logo-assets*/

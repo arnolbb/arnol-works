@@ -12,7 +12,7 @@ const badges = [
 export default function PdfColorBwSplitterPage() {
   return (
     <PageShell className="py-8 sm:py-12 lg:py-16">
-      <div className="mb-8 rounded-[28px] border border-slate-200 bg-white/85 p-6 dark:border-brand-line dark:bg-slate-900/60 sm:p-8">
+      <div className="mb-8 rounded-[28px] border border-slate-200 bg-white/90 p-6 dark:border-brand-line dark:bg-slate-900/60 sm:p-8">
         <div className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-slate-600 dark:text-slate-400">
           <Link href="/tools" className="hover:text-brand-primary dark:hover:text-indigo-300">Tools</Link>
           <span>›</span>
@@ -30,3 +30,4 @@ export default function PdfColorBwSplitterPage() {
     </PageShell>
   );
 }
+

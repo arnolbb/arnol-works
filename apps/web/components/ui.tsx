@@ -8,7 +8,7 @@ type PanelProps = Readonly<{
 }>;
 
 export function Panel({ children, className = "", as: Component = "div" }: PanelProps) {
-  return <Component className={`rounded-[24px] border border-slate-200 bg-white/95 shadow-[0_18px_60px_rgba(15,23,42,0.06)] dark:border-brand-line dark:bg-slate-900/72 dark:shadow-[0_18px_70px_rgba(0,0,0,0.22)] ${className}`}>{children}</Component>;
+  return <Component className={`rounded-[24px] border border-slate-200 bg-white/95 shadow-[0_18px_60px_rgba(15,23,42,0.06)] dark:border-brand-line dark:bg-slate-900/80 dark:shadow-[0_18px_70px_rgba(0,0,0,0.22)] ${className}`}>{children}</Component>;
 }
 
 export function Eyebrow({ children, className = "" }: Readonly<{ children: ReactNode; className?: string }>) {
@@ -34,3 +34,4 @@ export function ButtonLink({ href, children, variant = "primary", className = ""
 
   return <Link href={href} className={`inline-flex justify-center rounded-md px-5 py-3 text-sm font-semibold transition ${variants[variant]} ${className}`} {...props}>{children}</Link>;
 }
+
