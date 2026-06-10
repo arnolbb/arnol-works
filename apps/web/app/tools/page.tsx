@@ -57,15 +57,17 @@ export default function ToolsPage() {
 function ToolCard({ tool }: Readonly<{ tool: (typeof tools)[number] }>) {
   const available = tool.status === "available";
   return (
-    <article className={`group min-h-[320px] rounded-[20px] border bg-white p-6 transition hover:-translate-y-1 sm:p-7 dark:bg-slate-900/70 ${available ? "border-slate-200 hover:border-slate-300 dark:border-brand-line dark:hover:border-slate-500" : "border-slate-200 opacity-80 dark:border-brand-line"}`}>
+    <article className={`group flex min-h-[360px] flex-col rounded-[20px] border bg-white p-6 transition hover:-translate-y-1 sm:p-7 dark:bg-slate-900/70 ${available ? "border-slate-200 hover:border-slate-300 dark:border-brand-line dark:hover:border-slate-500" : "border-slate-200 opacity-80 dark:border-brand-line"}`}>
       <div className="flex items-start justify-between gap-5">
         <div className={`grid h-14 w-14 place-items-center rounded-xl text-base font-semibold ${available ? "bg-brand-primary text-white" : "bg-amber-50 text-amber-700 dark:bg-amber-400/10 dark:text-amber-300"}`}>{tool.icon}</div>
-        <span className={`rounded-full border px-4 py-2 font-mono text-xs ${available ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-300" : "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300"}`}>{available ? "Tersedia" : "Backlog"}</span>
+        <span className={`rounded-full border px-4 py-2 font-mono text-xs ${available ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-300" : "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300"}`}>{available ? "Tersedia" : "Rencana"}</span>
       </div>
-      <h2 className={`mt-9 text-2xl font-medium leading-tight tracking-[-0.03em] ${available ? "text-brand-ink dark:text-slate-100" : "text-slate-500 dark:text-slate-400"}`}>{tool.title}</h2>
-      <p className={`mt-4 text-base leading-7 ${available ? "text-brand-ink dark:text-slate-100" : "text-slate-500 dark:text-slate-400"}`}>{tool.description}</p>
-      <div className="mt-10 border-t border-slate-200 dark:border-brand-line pt-5">
-        {available ? <Link href={tool.href} className="text-lg font-semibold text-brand-primary dark:text-indigo-300">Gunakan →</Link> : <div><span className="text-lg text-slate-500 dark:text-slate-400">Masuk antrian build</span><div className="mt-8 h-1 w-full rounded-full bg-amber-50 dark:bg-amber-400/10"><div className="h-1 w-1/3 rounded-full bg-amber-300 dark:bg-amber-400" /></div></div>}
+      <div className="mt-9 flex flex-1 flex-col">
+        <h2 className={`min-h-[64px] text-2xl font-medium leading-tight tracking-[-0.03em] ${available ? "text-brand-ink dark:text-slate-100" : "text-slate-500 dark:text-slate-400"}`}>{tool.title}</h2>
+        <p className={`mt-4 text-base leading-7 ${available ? "text-slate-600 dark:text-slate-400" : "text-slate-500 dark:text-slate-400"}`}>{tool.description}</p>
+      </div>
+      <div className="mt-8 border-t border-slate-200 pt-5 dark:border-brand-line">
+        {available ? <Link href={tool.href} className="inline-flex text-base font-semibold text-brand-primary dark:text-indigo-300">Gunakan →</Link> : <span className="text-base text-slate-500 dark:text-slate-400">Direncanakan</span>}
       </div>
     </article>
   );
@@ -82,6 +84,8 @@ function IdeaCard() {
     </article>
   );
 }
+
+
 
 
 

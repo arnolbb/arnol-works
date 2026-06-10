@@ -153,15 +153,17 @@ function TimelineCard({ item }: Readonly<{ item: (typeof timeline)[number] }>) {
 function HomeToolCard({ tool }: Readonly<{ tool: (typeof tools)[number] }>) {
   const available = tool.status === "available";
   return (
-    <article className="group rounded-[20px] border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-slate-300 dark:border-brand-line dark:bg-slate-900/70 dark:hover:border-slate-500">
+    <article className="group flex min-h-[300px] flex-col rounded-[20px] border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-slate-300 dark:border-brand-line dark:bg-slate-900/70 dark:hover:border-slate-500">
       <div className="flex items-start justify-between gap-3">
         <div className={`grid h-11 w-11 place-items-center rounded-xl text-xs font-semibold ${available ? "bg-brand-soft text-brand-primary dark:bg-indigo-400/15 dark:text-indigo-200" : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-300"}`}>{tool.icon}</div>
         <span className={`rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide ${available ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-300" : "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300"}`}>{available ? "Tersedia" : "Rencana"}</span>
       </div>
-      <h3 className="mt-8 text-lg font-medium leading-7 tracking-[-0.02em] text-brand-ink dark:text-slate-100">{tool.title}</h3>
-      <p className="mt-3 min-h-20 text-sm leading-6 text-slate-600 dark:text-slate-400">{tool.description}</p>
-      <div className="mt-5 border-t border-slate-200 dark:border-brand-line pt-4">
-        {available ? <Link href={tool.href} className="text-sm font-medium text-brand-primary">Buka Tool →</Link> : <span className="text-sm text-slate-500 dark:text-slate-400">Direncanakan</span>}
+      <div className="mt-8 flex flex-1 flex-col">
+        <h3 className="min-h-[56px] text-lg font-medium leading-7 tracking-[-0.02em] text-brand-ink dark:text-slate-100">{tool.title}</h3>
+        <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">{tool.description}</p>
+      </div>
+      <div className="mt-6 border-t border-slate-200 pt-4 dark:border-brand-line">
+        {available ? <Link href={tool.href} className="inline-flex text-sm font-semibold text-brand-primary dark:text-indigo-300">Buka Tool →</Link> : <span className="text-sm text-slate-500 dark:text-slate-400">Direncanakan</span>}
       </div>
     </article>
   );
@@ -175,5 +177,7 @@ function NoteBlock({ title, children }: Readonly<{ title: string; children: Reac
     </div>
   );
 }
+
+
 
 
