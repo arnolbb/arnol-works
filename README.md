@@ -49,10 +49,24 @@ Jika tidak diisi, frontend memakai `http://localhost:8000`.
 - Pisah PDF Warna & Hitam Putih.
 - Kompres PDF.
 - Gabungkan PDF.
+- PDF ke Word (DOCX).
 - JPG/PNG ke PDF.
 - PDF ke JPG.
 - Kompres Gambar.
 - Resize Gambar.
+- Hapus Background Gambar.
+- Pas Foto Generator (2×3, 3×4, 4×6).
+- Hitung Kata & Karakter.
+- QR Code Generator.
+
+## Dependensi backend tambahan
+
+Tools baru membutuhkan dependensi tambahan:
+
+- `rembg` — untuk hapus background gambar dan pas foto generator.
+- `python-docx` — untuk konversi PDF ke Word.
+
+Install semua dengan `pip install -r requirements.txt`.
 
 ## Batasan saat ini
 
@@ -60,3 +74,5 @@ Jika tidak diisi, frontend memakai `http://localhost:8000`.
 - File upload disimpan sementara di local temp folder backend.
 - Temporary storage memiliki cleanup job lama saat startup/sebelum job baru.
 - Belum ada auth, payment, database production, admin dashboard, OCR, atau cloud storage permanen.
+- Hapus background dan pas foto generator membutuhkan `rembg` yang cukup besar (~500MB model).
+- PDF ke Word mengekstrak teks dan gambar, bukan layout pixel-perfect.

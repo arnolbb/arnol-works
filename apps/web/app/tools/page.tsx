@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { PageShell } from "@/components/page-shell";
 import { tools } from "@/lib/tools-registry";
 
-const categories = ["Semua", "PDF", "Gambar", "Developer", "Teks"];
+const categories = ["Semua", "PDF", "Gambar", "Konversi", "Generator", "Teks"];
 
 export default function ToolsPage() {
   const [activeCategory, setActiveCategory] = useState("Semua");
@@ -14,7 +14,7 @@ export default function ToolsPage() {
   const filteredTools = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return tools.filter((tool) => {
-      const categoryMap = activeCategory === "Developer" ? "Developers" : activeCategory === "Teks" ? "Text" : activeCategory;
+      const categoryMap = activeCategory === "Teks" ? "Text" : activeCategory;
       const matchesCategory = activeCategory === "Semua" || tool.category === categoryMap || tool.tags.includes(categoryMap);
       const matchesSearch = !normalizedQuery || `${tool.title} ${tool.description} ${tool.tags.join(" ")}`.toLowerCase().includes(normalizedQuery);
       return matchesCategory && matchesSearch;
@@ -84,6 +84,7 @@ function IdeaCard() {
     </article>
   );
 }
+
 
 
 

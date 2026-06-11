@@ -53,6 +53,18 @@ export const tools: Tool[] = [
     icon: "PDF",
   },
   {
+    id: "pdf-to-word",
+    slug: "pdf-to-word",
+    title: "PDF ke Word",
+    name: "PDF ke Word",
+    description: "Konversi file PDF menjadi dokumen Word (DOCX) agar bisa diedit untuk tugas, laporan, dan dokumen kantor.",
+    category: "Konversi",
+    tags: ["PDF", "Word", "DOCX", "Konversi"],
+    status: "available",
+    href: "/tools/pdf-to-word",
+    icon: "DOC",
+  },
+  {
     id: "jpg-to-pdf",
     slug: "jpg-to-pdf",
     title: "JPG/PNG ke PDF",
@@ -101,6 +113,54 @@ export const tools: Tool[] = [
     icon: "IMG",
   },
   {
+    id: "remove-bg",
+    slug: "remove-bg",
+    title: "Hapus Background Gambar",
+    name: "Hapus Background Gambar",
+    description: "Hapus background gambar secara otomatis menggunakan AI. Cocok untuk foto produk, pas foto, dan desain.",
+    category: "Gambar",
+    tags: ["Gambar", "AI", "Background"],
+    status: "available",
+    href: "/tools/remove-bg",
+    icon: "IMG",
+  },
+  {
+    id: "passport-photo",
+    slug: "passport-photo",
+    title: "Pas Foto Generator",
+    name: "Pas Foto Generator",
+    description: "Buat pas foto ukuran 2\u00d73, 3\u00d74, atau 4\u00d76 dengan background merah, biru, atau putih. Siap cetak.",
+    category: "Gambar",
+    tags: ["Gambar", "Pas Foto", "AI"],
+    status: "available",
+    href: "/tools/passport-photo",
+    icon: "IMG",
+  },
+  {
+    id: "word-counter",
+    slug: "word-counter",
+    title: "Hitung Kata & Karakter",
+    name: "Hitung Kata & Karakter",
+    description: "Hitung jumlah kata, karakter, kalimat, dan paragraf secara instan untuk esai, skripsi, dan konten.",
+    category: "Text",
+    tags: ["Teks", "Gratis", "Developers"],
+    status: "available",
+    href: "/tools/word-counter",
+    icon: "TXT",
+  },
+  {
+    id: "qr-code-generator",
+    slug: "qr-code-generator",
+    title: "QR Code Generator",
+    name: "QR Code Generator",
+    description: "Buat QR code dari teks atau URL secara instan. Cocok untuk UMKM, event, dan media sosial.",
+    category: "Generator",
+    tags: ["Generator", "QR", "Gratis"],
+    status: "available",
+    href: "/tools/qr-code-generator",
+    icon: "QR",
+  },
+  {
     id: "rotate-pdf",
     slug: "rotate-pdf",
     title: "Putar PDF",
@@ -110,7 +170,7 @@ export const tools: Tool[] = [
     tags: ["PDF"],
     status: "coming-soon",
     href: "/tools",
-    icon: "↻",
+    icon: "\u21bb",
   },
 ];
 
@@ -121,7 +181,3 @@ export function getAvailableTools() {
 export function getFeaturedTool() {
   return tools.find((tool) => tool.featured) ?? getAvailableTools()[0];
 }
-
-
-
-
