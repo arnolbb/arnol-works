@@ -5,9 +5,10 @@ import { getAvailableTools, tools } from "@/lib/tools-registry";
 
 const projects = [
   { title: "Arnol Works Platform", status: "Live", description: "Portfolio + tools lab dengan utilitas PDF dan gambar yang bisa dipakai langsung.", meta: "Next.js · FastAPI · Local temp storage", href: "/" },
+  { title: "RetroWave Arcade", status: "Live", description: "Game tembak-tembakan neon arcade Space Invaders dengan audio player synth dan efek CRT retro.", meta: "React · Canvas API · Web Audio API", href: "/projects/retrowave" },
+  { title: "KeyStrike Time Attack", status: "Live", description: "Game mengetik bertema neon-cyberpunk. Uji dan latih kecepatan serta akurasi mengetikmu dalam 60 detik.", meta: "React · LocalStorage · Cyber Theme", href: "/projects/keystrike" },
   { title: "PDF Toolkit", status: "Active", description: "Pisah PDF warna/hitam-putih, kompres PDF, gabungkan PDF, dan konversi PDF ke JPG.", meta: "PyMuPDF · pypdf", href: "/tools" },
   { title: "Image Toolkit", status: "Active", description: "JPG/PNG ke PDF, kompres gambar, dan resize gambar untuk kebutuhan upload harian.", meta: "Pillow · ZIP output", href: "/tools" },
-  { title: "KeyStrike Time Attack", status: "Live", description: "Game mengetik bertema neon-cyberpunk. Uji dan latih kecepatan serta akurasi mengetikmu dalam 60 detik.", meta: "React · LocalStorage · Cyber Theme", href: "/projects/keystrike" },
 ];
 
 export default function ProjectsPage() {
@@ -203,7 +204,43 @@ function renderProjectPreview(title: string) {
           </div>
         </div>
       );
+    case "RetroWave Arcade":
+      return (
+        <div className="w-full h-full relative flex items-center justify-center bg-[#09030f] overflow-hidden">
+          {/* Vaporwave grid */}
+          <div className="absolute bottom-0 left-0 right-0 h-1/2 opacity-60" style={{backgroundImage: "linear-gradient(rgba(185,103,255,0.2) 1px,transparent 1px),linear-gradient(90deg,rgba(185,103,255,0.2) 1px,transparent 1px)", backgroundSize: "16px 16px", transform: "perspective(200px) rotateX(50deg)", transformOrigin: "top"}} />
+          {/* Neon glow */}
+          <div className="absolute top-0 inset-x-0 h-10 bg-[#FF71CE]/10 blur-xl" />
+          {/* Mini arcade screen */}
+          <div className="relative z-10 flex flex-col items-center gap-1.5">
+            <div className="text-[9px] font-bold italic uppercase tracking-widest">
+              <span className="text-white">RETRO</span><span className="text-[#FF71CE]">WAVE</span>
+            </div>
+            <div className="w-28 h-16 rounded border border-[#FF71CE]/40 bg-black/70 overflow-hidden relative p-1 flex flex-col justify-between">
+              {/* Invader grid */}
+              <div className="grid grid-cols-5 gap-0.5 px-1">
+                {Array.from({length: 10}).map((_,i) => (
+                  <div key={i} className="h-1.5 w-2 rounded-sm" style={{backgroundColor: i%2===0?"#B967FF":"#01CDFE", opacity: 0.8}} />
+                ))}
+              </div>
+              {/* Player ship */}
+              <div className="flex justify-center">
+                <div className="w-4 h-1.5 bg-[#05FFA1] rounded-sm" style={{clipPath:"polygon(50% 0%,100% 100%,0% 100%)"}} />
+              </div>
+            </div>
+            <div className="flex gap-3 text-[6px] font-mono text-white/50 uppercase tracking-widest">
+              <span className="text-[#FF71CE]">WAVE 1</span>
+              <span className="text-[#01CDFE]">SCORE 000</span>
+            </div>
+          </div>
+          {/* Scanline */}
+          <div className="absolute inset-0 pointer-events-none opacity-10" style={{backgroundImage:"repeating-linear-gradient(0deg,rgba(0,0,0,0.5) 0px,rgba(0,0,0,0.5) 1px,transparent 1px,transparent 3px)"}} />
+        </div>
+      );
     default:
       return null;
   }
 }
+
+
+

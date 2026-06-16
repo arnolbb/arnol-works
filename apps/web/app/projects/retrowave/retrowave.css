@@ -1,0 +1,158 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* Hide global layout header and footer on RetroWave pages */
+body:has(.retrowave-theme) > div > header,
+body:has(.retrowave-theme) > div > footer {
+  display: none !important;
+}
+
+.retrowave-theme {
+  --rw-neon-pink: #FF71CE;
+  --rw-neon-blue: #01CDFE;
+  --rw-neon-green: #05FFA1;
+  --rw-neon-purple: #B967FF;
+  --rw-neon-yellow: #FFFB96;
+  --rw-bg: #09030f;
+  --rw-panel-bg: rgba(15, 7, 21, 0.9);
+  --rw-border: rgba(255, 255, 255, 0.1);
+
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--rw-bg);
+  color: white;
+  min-height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Tailwind color shims for RetroWave scope */
+.retrowave-theme .text-neon-pink  { color: var(--rw-neon-pink); }
+.retrowave-theme .text-neon-blue  { color: var(--rw-neon-blue); }
+.retrowave-theme .text-neon-green { color: var(--rw-neon-green); }
+.retrowave-theme .text-neon-purple { color: var(--rw-neon-purple); }
+.retrowave-theme .text-neon-yellow { color: var(--rw-neon-yellow); }
+.retrowave-theme .bg-neon-pink { background-color: var(--rw-neon-pink); }
+.retrowave-theme .bg-neon-blue { background-color: var(--rw-neon-blue); }
+.retrowave-theme .border-neon-pink\/40 { border-color: rgba(255,113,206,0.4); }
+.retrowave-theme .border-neon-blue\/60 { border-color: rgba(1,205,254,0.6); }
+.retrowave-theme .border-neon-pink\/60 { border-color: rgba(255,113,206,0.6); }
+.retrowave-theme .accent-neon-pink { accent-color: var(--rw-neon-pink); }
+.retrowave-theme .hover\:bg-\[#ff8ed8\]:hover { background-color: #ff8ed8; }
+
+/* Panel component */
+.rw-arcade-panel {
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  background-color: rgba(15, 7, 21, 0.9);
+}
+
+/* Interactive icon button */
+.rw-interactive-icon {
+  display: grid;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  place-items: center;
+  border-radius: 0.375rem;
+  transition: color 0.15s;
+}
+
+/* Neon text glow */
+.rw-neon-text-blue {
+  text-shadow: 0 0 5px #01CDFE, 0 0 10px #01CDFE;
+}
+.rw-neon-text-pink {
+  text-shadow: 0 0 5px #FF71CE, 0 0 10px #FF71CE;
+}
+.rw-neon-text-yellow {
+  text-shadow: 0 0 5px #FFFB96, 0 0 10px #FFFB96;
+}
+
+/* Vaporwave background grid */
+.rw-vaporwave-grid {
+  background-image:
+    linear-gradient(rgba(185,103,255,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(185,103,255,0.12) 1px, transparent 1px);
+  background-size: 40px 40px;
+  perspective: 500px;
+}
+.rw-vaporwave-grid-inner {
+  transform: rotateX(60deg);
+  transform-origin: top;
+  height: 200%;
+  animation: rw-grid-drift 20s linear infinite;
+}
+
+/* CRT effects */
+.rw-crt-vignette {
+  background:
+    radial-gradient(circle at 50% 44%, transparent 0 46%, rgba(0,0,0,0.34) 78%, rgba(0,0,0,0.68) 100%),
+    linear-gradient(180deg, rgba(255,113,206,0.04), transparent 32%, rgba(1,205,254,0.025));
+}
+.rw-scanline {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255,255,255,0.05) 50%,
+    transparent 50%,
+    rgba(0,0,0,0.1)
+  );
+  background-size: 100% 4px;
+}
+.rw-scanline-beam {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255,255,255,0.03) 50%,
+    transparent 100%
+  );
+  height: 100px;
+  position: absolute;
+  width: 100%;
+  pointer-events: none;
+  animation: rw-scanline-anim 8s linear infinite;
+}
+
+/* Fade-in animation */
+.rw-fade-in {
+  animation: rw-fade-in 0.4s ease-out;
+}
+.rw-slide-in-left {
+  animation: rw-slide-in-left 0.4s ease-out;
+}
+
+/* Keyframes */
+@keyframes rw-grid-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 0 40px; }
+}
+@keyframes rw-scanline-anim {
+  0%   { top: -10%; }
+  100% { top: 110%; }
+}
+@keyframes rw-equalizer {
+  0%   { height: 15%; }
+  100% { height: 100%; }
+}
+@keyframes rw-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes rw-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes rw-slide-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retrowave-theme *,
+  .retrowave-theme *::before,
+  .retrowave-theme *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
