@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, DragEvent, useMemo, useState } from "react";
+import { ToolIcon } from "@/components/tools/tool-icon";
 import { analyzePdf, AnalyzeResult, fileUrl, splitPdf, SplitResult } from "@/lib/api-client";
 import { parsePageRange } from "@/lib/page-range";
 
@@ -138,7 +139,7 @@ export function PdfUploadForm() {
         <section className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-white dark:bg-slate-900/70 p-5 sm:p-7">
           {!selectedFile ? (
             <label onDragOver={(event) => event.preventDefault()} onDrop={handleDrop} className="group flex cursor-pointer flex-col items-center justify-center rounded-[18px] border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/70 px-5 py-9 text-center transition hover:border-brand-primary sm:px-6 sm:py-12">
-              <span className="grid h-12 w-12 place-items-center rounded-full bg-brand-soft text-xl text-brand-primary">PDF</span>
+              <div className="grid h-12 w-12 place-items-center rounded-full bg-brand-soft text-brand-primary"><ToolIcon icon="PDF" slug="pdf-color-bw-splitter" className="size-6" /></div>
               <span className="mt-4 text-xl font-medium text-brand-ink dark:text-slate-100">Upload file PDF Anda</span>
               <span className="mt-2 max-w-md text-sm leading-6 text-slate-600 dark:text-slate-300">Tarik & lepas satu file PDF di sini atau klik untuk memilih file.</span>
               <span className="mt-5 rounded-md bg-brand-primary px-6 py-3 text-sm font-semibold text-white transition group-hover:bg-brand-hover">Pilih File PDF</span>
@@ -149,7 +150,7 @@ export function PdfUploadForm() {
             <div className="rounded-[18px] border border-slate-200 dark:border-brand-line bg-brand-paper dark:bg-slate-950/70 p-5 sm:p-6">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-slate-200 dark:border-brand-line bg-white dark:bg-slate-900/70 font-mono text-xs font-semibold text-brand-primary">PDF</div>
+                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-slate-200 dark:border-brand-line bg-white dark:bg-slate-900/70 text-brand-primary"><ToolIcon icon="PDF" slug="pdf-color-bw-splitter" className="size-6" /></div>
                   <div>
                     <p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-300">File aktif</p>
                     <p className="mt-2 break-all text-lg font-medium text-brand-ink dark:text-slate-100">{selectedFile.name}</p>
@@ -357,7 +358,7 @@ function DownloadCard({ title, count, href, variant }: Readonly<{ title: string;
   return (
     <div className={`rounded-[14px] border bg-white dark:bg-slate-900/70 p-5 ${variant === "color" ? "border-brand-primary" : "border-slate-200 dark:border-brand-line"}`}>
       <div className="flex items-start gap-4">
-        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-primary">{variant === "color" ? "?" : "?"}</div>
+        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-primary"><ToolIcon icon="PDF" slug="pdf-color-bw-splitter" className="size-6" /></div>
         <div className="min-w-0">
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-300">Output PDF</p>
           <h3 className="mt-1 text-lg font-medium text-brand-ink dark:text-slate-100">{title}</h3>

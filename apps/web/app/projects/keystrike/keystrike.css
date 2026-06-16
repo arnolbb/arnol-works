@@ -1,0 +1,137 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Hide global layout header and footer on KeyStrike pages, but keep local game headers */
+body:has(.keystrike-theme) > div > header,
+body:has(.keystrike-theme) > div > footer {
+  display: none !important;
+}
+
+.keystrike-theme {
+  --radius: 0.5rem;
+  --background: oklch(0.16 0.03 260);
+  --foreground: oklch(0.96 0.02 200);
+  --card: oklch(0.21 0.04 260);
+  --card-foreground: oklch(0.96 0.02 200);
+  --popover: oklch(0.21 0.04 260);
+  --popover-foreground: oklch(0.96 0.02 200);
+  --primary: oklch(0.82 0.16 200);
+  --primary-foreground: oklch(0.16 0.03 260);
+  --secondary: oklch(0.27 0.05 270);
+  --secondary-foreground: oklch(0.96 0.02 200);
+  --muted: oklch(0.24 0.04 265);
+  --muted-foreground: oklch(0.72 0.04 230);
+  --accent: oklch(0.68 0.26 330);
+  --accent-foreground: oklch(0.16 0.03 260);
+  --destructive: oklch(0.65 0.27 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --success: oklch(0.78 0.22 150);
+  --success-foreground: oklch(0.16 0.03 260);
+  --border: oklch(0.32 0.06 260);
+  --input: oklch(0.27 0.05 270);
+  --ring: oklch(0.82 0.16 200);
+
+  --neon-cyan: oklch(0.85 0.17 200);
+  --neon-magenta: oklch(0.7 0.28 330);
+  --neon-green: oklch(0.82 0.22 150);
+  --neon-red: oklch(0.68 0.27 25);
+  --neon-yellow: oklch(0.88 0.18 95);
+  --grid-line: oklch(0.32 0.06 260 / 0.35);
+
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: "Rajdhani", "Inter", system-ui, sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    radial-gradient(ellipse at top, oklch(0.25 0.1 280 / 0.5), transparent 60%),
+    radial-gradient(ellipse at bottom, oklch(0.25 0.12 200 / 0.4), transparent 60%);
+  background-size:
+    48px 48px,
+    48px 48px,
+    100% 100%,
+    100% 100%;
+}
+
+.keystrike-theme h1,
+.keystrike-theme h2,
+.keystrike-theme h3,
+.keystrike-theme h4,
+.keystrike-theme .font-display {
+  font-family: "Orbitron", system-ui, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.keystrike-theme .font-mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Custom colors mapped to Tailwind-like classes */
+.keystrike-theme .bg-background { background-color: var(--background); }
+.keystrike-theme .bg-card { background-color: var(--card); }
+.keystrike-theme .bg-card\/40 { background-color: oklch(0.21 0.04 260 / 0.4); }
+.keystrike-theme .bg-card\/60 { background-color: oklch(0.21 0.04 260 / 0.6); }
+.keystrike-theme .text-foreground { color: var(--foreground); }
+.keystrike-theme .text-foreground\/80 { color: oklch(0.96 0.02 200 / 0.80); }
+.keystrike-theme .text-background { color: var(--background); }
+.keystrike-theme .text-muted-foreground { color: var(--muted-foreground); }
+.keystrike-theme .text-muted-foreground\/60 { color: oklch(0.72 0.04 230 / 0.60); }
+.keystrike-theme .border-border { border-color: var(--border); }
+.keystrike-theme .border-border\/50 { border-color: oklch(0.32 0.06 260 / 0.5); }
+.keystrike-theme .border-input { border-color: var(--input); }
+
+/* Utilities */
+.keystrike-theme .neon-text-cyan {
+  color: var(--neon-cyan);
+  text-shadow:
+    0 0 8px oklch(0.85 0.17 200 / 0.7),
+    0 0 24px oklch(0.85 0.17 200 / 0.35);
+}
+
+.keystrike-theme .neon-text-magenta {
+  color: var(--neon-magenta);
+  text-shadow:
+    0 0 8px oklch(0.7 0.28 330 / 0.7),
+    0 0 24px oklch(0.7 0.28 330 / 0.35);
+}
+
+.keystrike-theme .neon-text-green {
+  color: var(--neon-green);
+  text-shadow: 0 0 6px oklch(0.82 0.22 150 / 0.6);
+}
+
+.keystrike-theme .neon-text-red {
+  color: var(--neon-red);
+  text-shadow: 0 0 6px oklch(0.68 0.27 25 / 0.6);
+}
+
+.keystrike-theme .neon-border {
+  border: 1px solid var(--neon-cyan);
+  box-shadow:
+    0 0 12px oklch(0.85 0.17 200 / 0.35),
+    inset 0 0 12px oklch(0.85 0.17 200 / 0.08);
+}
+
+.keystrike-theme .neon-border-magenta {
+  border: 1px solid var(--neon-magenta);
+  box-shadow:
+    0 0 12px oklch(0.7 0.28 330 / 0.35),
+    inset 0 0 12px oklch(0.7 0.28 330 / 0.08);
+}
+
+.keystrike-theme .neon-glow {
+  box-shadow:
+    0 0 16px oklch(0.85 0.17 200 / 0.45),
+    0 0 40px oklch(0.85 0.17 200 / 0.25);
+}
+
+.keystrike-theme .caret-blink {
+  animation: keystrike-caret-blink 1s steps(2) infinite;
+}
+
+@keyframes keystrike-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
