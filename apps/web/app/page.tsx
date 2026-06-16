@@ -185,7 +185,13 @@ function MiniStat({ label, value }: Readonly<{ label: string; value: string }>) 
   return <div className="rounded-xl border border-slate-200/80 bg-slate-50/50 p-3 dark:border-brand-line/50 dark:bg-slate-900/80"><p className="font-mono text-[10px] uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</p><p className="mt-1 text-xs font-semibold text-brand-ink dark:text-slate-100">{value}</p></div>;
 }
 
-function TimelineCard({ item }: Readonly<{ item: (typeof timeline)[number] }>) {
+type TimelineItem = {
+  label: string;
+  text: string;
+  tone: string;
+};
+
+function TimelineCard({ item }: Readonly<{ item: TimelineItem }>) {
   const dotColor = item.tone === "emerald" ? "bg-emerald-500" : item.tone === "amber" ? "bg-amber-500" : "bg-brand-primary";
   return <article className="rounded-[24px] border border-slate-200/80 dark:border-brand-line/50 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-[0_4px_20px_rgba(15,23,42,0.02)]"><span className={`block h-2.5 w-2.5 rounded-full ${dotColor}`} /><p className="mt-5 font-mono text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">{item.label}</p><p className="mt-3 text-sm leading-6 text-brand-ink dark:text-slate-100">{item.text}</p></article>;
 }
