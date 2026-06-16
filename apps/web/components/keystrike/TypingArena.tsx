@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+﻿import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { StatTile } from "./StatTile";
 import { TextDisplay } from "./TextDisplay";
@@ -51,14 +51,38 @@ export function TypingArena() {
   const { state, handleChar, handleBackspace, reset } = useGameEngine();
   const inputRef = useRef<HTMLInputElement>(null);
   const [savedResult, setSavedResult] = useState<{ isNew: boolean } | null>(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+  const activateKeyboard = useCallback(() => {
+    inputRef.current?.focus({ preventScroll: true });
+  }, []);
 
   // Keep hidden input focused while playing
   useEffect(() => {
-    const focus = () => inputRef.current?.focus();
+    const focus = () => activateKeyboard();
     focus();
     const onClick = () => focus();
     window.addEventListener("click", onClick);
     return () => window.removeEventListener("click", onClick);
+  }, [activateKeyboard]);
+
+  useEffect(() => {
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+
+    const updateKeyboardState = () => {
+      setIsKeyboardOpen(window.innerHeight - viewport.height > 120);
+    };
+
+    updateKeyboardState();
+    viewport.addEventListener("resize", updateKeyboardState);
+    viewport.addEventListener("scroll", updateKeyboardState);
+
+    return () => {
+      viewport.removeEventListener("resize", updateKeyboardState);
+      viewport.removeEventListener("scroll", updateKeyboardState);
+    };
   }, []);
 
   // Save high score once when finished
@@ -91,34 +115,37 @@ export function TypingArena() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
     if (!v) return;
-    const ch = v[v.length - 1];
-    if (ch) handleChar(ch);
+    for (const ch of Array.from(v)) {
+      handleChar(ch);
+    }
     e.target.value = "";
   };
 
   const handleRetry = () => {
     setSavedResult(null);
     reset();
-    setTimeout(() => inputRef.current?.focus(), 0);
+    setTimeout(() => activateKeyboard(), 0);
   };
 
   return (
-    <div className="flex flex-col flex-grow w-full max-w-5xl mx-auto p-4 md:p-8">
+    <div
+      className={`keystrike-arena ${isKeyboardOpen ? "keystrike-keyboard-open" : ""} flex min-h-dvh w-full max-w-5xl flex-grow flex-col mx-auto px-3 py-3 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-4 sm:py-4 md:p-8`}
+    >
       {/* Header */}
-      <header className="flex items-center justify-between py-4 border-b border-border/30">
-        <div className="font-display text-sm uppercase tracking-[0.3em] text-muted-foreground">
+      <header className="keystrike-arena-header flex items-center justify-between gap-3 py-2 md:py-4 border-b border-border/30">
+        <div className="font-display text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">
           Arena // Time Attack
         </div>
         <button
           onClick={() => router.push("/projects/keystrike")}
-          className="flex items-center gap-1 text-muted-foreground hover:text-foreground cursor-pointer transition text-sm bg-transparent border-0"
+          className="flex min-h-11 items-center gap-1.5 rounded-md px-3 text-muted-foreground hover:text-foreground cursor-pointer transition text-sm bg-transparent border-0"
         >
           <XIcon /> Quit
         </button>
       </header>
 
       {/* Live stats */}
-      <div className="flex flex-wrap justify-center gap-2 md:gap-3 py-6">
+      <div className="keystrike-stats grid grid-cols-3 md:grid-cols-6 gap-2 sm:gap-2 md:gap-3 py-4 md:py-6 max-w-xl md:max-w-none w-full mx-auto">
         <StatTile
           label="Timer"
           value={`${state.timeLeft}s`}
@@ -148,18 +175,39 @@ export function TypingArena() {
       </div>
 
       {/* Text arena */}
-      <main className="flex-1 flex items-center justify-center py-10">
+      <main className="keystrike-main flex min-h-0 flex-1 items-start justify-center py-3 sm:py-6 md:items-center md:py-10">
         <div className="w-full">
-          <div className="rounded-xl neon-border bg-card/40 backdrop-blur p-6 md:p-10">
+          <div
+            className="keystrike-text-panel relative overflow-hidden rounded-xl neon-border bg-card/40 backdrop-blur p-4 sm:p-6 md:p-10"
+            onPointerDown={activateKeyboard}
+          >
             {state.status === "idle" && (
-              <div className="mb-4 text-center text-xs uppercase tracking-[0.3em] neon-text-cyan caret-blink">
-                Start typing to engage…
+              <div className="mb-4 text-center text-xs sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] neon-text-cyan caret-blink">
+                Ketuk lalu mulai mengetik
               </div>
             )}
             <TextDisplay sentence={state.sentence} charStates={state.charStates} />
+            
+            {/* Mobile Keyboard Re-focus Prompt Overlay */}
+            {!isFocused && state.status !== "finished" && (
+              <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center p-4 text-center z-10">
+                <p className="text-xs sm:text-sm font-semibold text-slate-200 tracking-wide">Keyboard Tidak Aktif</p>
+                <p className="text-[10px] sm:text-xs text-slate-400 mt-1 mb-3">Ketuk di mana saja untuk mengaktifkan keyboard</p>
+                <button 
+                  onPointerDown={(event) => {
+                    event.preventDefault();
+                    activateKeyboard();
+                  }}
+                  onClick={activateKeyboard}
+                  className="min-h-11 px-4 text-xs font-semibold rounded bg-[color:var(--neon-cyan)] text-background hover:bg-[color:var(--neon-cyan)]/90 neon-glow transition cursor-pointer"
+                >
+                  Buka Keyboard
+                </button>
+              </div>
+            )}
           </div>
 
-          <p className="mt-4 text-center text-xs text-muted-foreground">
+          <p className="keystrike-tip mt-3 sm:mt-4 text-center text-[11px] sm:text-xs text-muted-foreground hidden sm:block">
             Tip: Tekan{" "}
             <kbd className="px-1.5 py-0.5 rounded border border-border bg-card text-foreground font-mono">
               Backspace
@@ -180,8 +228,10 @@ export function TypingArena() {
         spellCheck={false}
         onKeyDown={onKeyDown}
         onChange={onChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         aria-label="Typing input"
-        className="fixed -top-10 left-0 size-1 opacity-0"
+        className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-1/2 h-11 w-[min(18rem,calc(100vw-2rem))] -translate-x-1/2 opacity-0 text-base"
       />
 
       <ResultModal

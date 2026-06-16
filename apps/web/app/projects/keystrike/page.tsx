@@ -49,24 +49,24 @@ export default function KeyStrikeIndex() {
   }, []);
 
   return (
-    <div className="keystrike-theme flex flex-col items-center justify-center min-h-screen px-6 py-12 relative overflow-hidden">
+    <div className="keystrike-theme flex min-h-dvh flex-col items-center justify-center px-4 py-10 pt-24 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:px-6 md:py-12 relative overflow-hidden">
       {/* Absolute Positioned Back Button */}
       <Link
         href="/projects"
-        className="absolute top-6 left-6 md:top-8 md:left-8 flex items-center text-muted-foreground hover:text-foreground cursor-pointer transition text-sm font-display tracking-[0.15em] bg-transparent border-0 uppercase z-20"
+        className="absolute left-4 top-[max(1rem,env(safe-area-inset-top))] md:left-8 md:top-8 flex min-h-11 items-center rounded-md pr-2 text-muted-foreground hover:text-foreground cursor-pointer transition text-xs sm:text-sm font-display tracking-[0.12em] sm:tracking-[0.15em] bg-transparent border-0 uppercase z-20"
       >
         <BackIcon /> Kembali ke Proyek
       </Link>
 
-      <div className="w-full max-w-3xl flex flex-col items-center text-center gap-6">
+      <div className="w-full max-w-3xl flex flex-col items-center text-center gap-5 sm:gap-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card/60 backdrop-blur text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
           <span className="size-1.5 rounded-full bg-[color:var(--neon-green)] animate-pulse" />
           Cyber Arena Online
         </div>
 
-        <Logo className="text-6xl md:text-8xl" />
+        <Logo className="text-4xl sm:text-6xl md:text-8xl" />
 
-        <p className="font-display text-base md:text-lg tracking-[0.3em] uppercase text-muted-foreground">
+        <p className="font-display text-sm md:text-lg tracking-[0.18em] sm:tracking-[0.3em] uppercase text-muted-foreground">
           Type faster. Strike harder.
         </p>
 
@@ -76,12 +76,12 @@ export default function KeyStrikeIndex() {
         </p>
 
         <Link href="/projects/keystrike/play" className="mt-2">
-          <span className="font-display tracking-[0.25em] text-base px-10 py-4 bg-[color:var(--neon-cyan)] text-background hover:bg-[color:var(--neon-cyan)]/90 neon-glow transition rounded-md font-bold cursor-pointer inline-block">
+          <span className="font-display inline-flex min-h-12 items-center justify-center tracking-[0.2em] sm:tracking-[0.25em] text-sm sm:text-base px-8 sm:px-10 py-3 bg-[color:var(--neon-cyan)] text-background hover:bg-[color:var(--neon-cyan)]/90 neon-glow transition rounded-md font-bold cursor-pointer">
             START GAME
           </span>
         </Link>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full pt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 w-full pt-6 sm:pt-8">
           <Feature icon={<ZapIcon />} label="Real-time WPM" />
           <Feature icon={<TargetIcon />} label="Accuracy Tracking" />
           <Feature icon={<FlameIcon />} label="Combo System" />
@@ -100,7 +100,7 @@ export default function KeyStrikeIndex() {
 
 function Feature({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <div className="rounded-md border border-border bg-card/40 backdrop-blur px-3 py-3 flex items-center gap-2 justify-center text-xs uppercase tracking-widest text-muted-foreground">
+    <div className="min-h-11 rounded-md border border-border bg-card/40 backdrop-blur px-3 py-3 flex items-center gap-2 justify-center text-xs uppercase tracking-widest text-muted-foreground">
       <span className="neon-text-cyan">{icon}</span>
       <span>{label}</span>
     </div>

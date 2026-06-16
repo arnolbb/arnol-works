@@ -41,7 +41,10 @@ body:has(.keystrike-theme) > div > footer {
   color: var(--foreground);
   font-family: "Rajdhani", "Inter", system-ui, sans-serif;
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
@@ -52,6 +55,13 @@ body:has(.keystrike-theme) > div > footer {
     48px 48px,
     100% 100%,
     100% 100%;
+}
+
+@supports (padding: max(0px)) {
+  .keystrike-theme {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
 }
 
 .keystrike-theme h1,
@@ -130,8 +140,141 @@ body:has(.keystrike-theme) > div > footer {
   animation: keystrike-caret-blink 1s steps(2) infinite;
 }
 
+.keystrike-theme .keystrike-arena {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 640px) {
+  .keystrike-theme .keystrike-arena-header {
+    min-height: 40px;
+  }
+
+  .keystrike-theme .keystrike-stat-tile {
+    min-height: 52px;
+  }
+
+  .keystrike-theme .keystrike-text-panel {
+    min-height: 100px;
+  }
+}
+
+/* Compact mobile layout for smaller screens */
+@media (max-width: 640px) and (max-height: 700px) {
+  .keystrike-theme .keystrike-arena {
+    padding-top: 0.5rem;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .keystrike-theme .keystrike-arena-header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .keystrike-theme .keystrike-stats {
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .keystrike-theme .keystrike-stat-tile {
+    min-height: 48px;
+    padding: 0.5rem 0.625rem;
+  }
+
+  .keystrike-theme .keystrike-stat-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .keystrike-theme .keystrike-stat-value {
+    font-size: 0.9375rem;
+  }
+
+  .keystrike-theme .keystrike-main {
+    padding-top: 0.5rem;
+  }
+
+  .keystrike-theme .keystrike-text-panel {
+    min-height: 88px;
+    padding: 0.75rem 1rem;
+  }
+
+  .keystrike-theme .keystrike-text-display {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .keystrike-theme .keystrike-tip {
+    display: none;
+  }
+}
+
+/* Mobile keyboard open state */
+@media (max-width: 640px) {
+  .keystrike-theme .keystrike-arena.keystrike-keyboard-open {
+    padding-top: 0.5rem;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .keystrike-theme .keystrike-keyboard-open .keystrike-arena-header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .keystrike-theme .keystrike-keyboard-open .keystrike-stats {
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .keystrike-theme .keystrike-keyboard-open .keystrike-stat-tile {
+    min-height: 48px;
+    padding: 0.5rem 0.625rem;
+  }
+
+  .keystrike-theme .keystrike-keyboard-open .keystrike-stat-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .keystrike-theme .keystrike-keyboard-open .keystrike-stat-value {
+    font-size: 0.9375rem;
+  }
+
+  .keystrike-theme .keystrike-keyboard-open .keystrike-main {
+    padding-top: 0.5rem;
+  }
+
+  .keystrike-theme .keystrike-keyboard-open .keystrike-text-panel {
+    min-height: 88px;
+    padding: 0.75rem 1rem;
+  }
+
+  .keystrike-theme .keystrike-keyboard-open .keystrike-text-display {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .keystrike-theme .keystrike-keyboard-open .keystrike-tip {
+    display: none;
+  }
+}
+
 @keyframes keystrike-caret-blink {
   50% {
     opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keystrike-theme *,
+  .keystrike-theme *::before,
+  .keystrike-theme *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
+    transition-duration: 0.01ms;
   }
 }

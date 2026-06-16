@@ -5,7 +5,7 @@ import "../keystrike.css";
 
 export default function KeyStrikePlayPage() {
   return (
-    <div className="keystrike-theme min-h-screen flex flex-col">
+    <div className="keystrike-theme min-h-dvh flex flex-col">
       <TypingArena />
     </div>
   );

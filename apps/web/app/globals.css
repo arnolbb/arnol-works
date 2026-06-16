@@ -14,10 +14,10 @@
 
 .dark {
   color-scheme: dark;
-  --page-bg: #070c18;
-  --page-grid: rgba(148, 163, 184, 0.07);
-  --page-glow-a: rgba(99, 102, 241, 0.18);
-  --page-glow-b: rgba(245, 158, 11, 0.08);
+  --page-bg: #111827;
+  --page-grid: rgba(203, 213, 225, 0.08);
+  --page-glow-a: rgba(99, 102, 241, 0.22);
+  --page-glow-b: rgba(16, 185, 129, 0.12);
 }
 
 * {
@@ -43,7 +43,63 @@ body {
 }
 
 .dark body {
-  color: #e5edf8;
+  color: #f1f5f9;
+}
+
+.dark .dark\:text-slate-500 {
+  color: rgb(148 163 184) !important;
+}
+
+.dark .dark\:text-slate-400 {
+  color: rgb(203 213 225) !important;
+}
+
+.dark .dark\:text-slate-300 {
+  color: rgb(226 232 240) !important;
+}
+
+.dark .dark\:text-slate-200,
+.dark .dark\:text-slate-100 {
+  color: rgb(248 250 252) !important;
+}
+
+.dark .dark\:border-brand-line,
+.dark .dark\:border-brand-line\/50 {
+  border-color: rgb(71 85 105 / 0.9) !important;
+}
+
+.dark .dark\:border-brand-line\/30 {
+  border-color: rgb(71 85 105 / 0.6) !important;
+}
+
+.dark .dark\:bg-brand-night {
+  background-color: rgb(17 24 39) !important;
+}
+
+.dark .dark\:bg-brand-night\/80 {
+  background-color: rgb(17 24 39 / 0.9) !important;
+}
+
+.dark .dark\:bg-brand-panel,
+.dark .dark\:bg-brand-panel\/60 {
+  background-color: rgb(30 41 59 / 0.92) !important;
+}
+
+.dark .dark\:bg-slate-950\/70 {
+  background-color: rgb(30 41 59 / 0.78) !important;
+}
+
+.dark .dark\:bg-slate-900,
+.dark .dark\:bg-slate-900\/60,
+.dark .dark\:bg-slate-900\/75,
+.dark .dark\:bg-slate-900\/80,
+.dark .dark\:bg-slate-900\/95 {
+  background-color: rgb(30 41 59 / 0.9) !important;
+}
+
+.dark .dark\:bg-slate-800,
+.dark .dark\:bg-slate-800\/80 {
+  background-color: rgb(51 65 85 / 0.92) !important;
 }
 
 /* Smooth transitions for theme switching & interactivity */

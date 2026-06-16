@@ -35,8 +35,8 @@ export function ResultModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm">
-      <div className="w-full max-w-md border neon-border bg-card p-6 rounded-xl shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4 bg-black/85 backdrop-blur-sm">
+      <div className="w-full max-w-md max-h-[calc(100dvh-1.5rem)] overflow-y-auto border neon-border bg-card p-4 sm:p-6 rounded-xl shadow-2xl relative">
         <div className="flex flex-col space-y-1.5 text-center mb-4">
           <h2 className="font-display text-center text-2xl neon-text-cyan tracking-widest">
             MISSION COMPLETE
@@ -65,16 +65,16 @@ export function ResultModal({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 w-full pt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full pt-4">
             <button
               onClick={onHome}
-              className="px-4 py-2 text-sm font-semibold rounded-md border border-slate-600 text-slate-300 hover:bg-slate-800 transition cursor-pointer"
+              className="min-h-11 px-4 py-2 text-sm font-semibold rounded-md border border-slate-600 text-slate-300 hover:bg-slate-800 transition cursor-pointer"
             >
               Back to Home
             </button>
             <button
               onClick={onRetry}
-              className="px-4 py-2 text-sm font-semibold rounded-md bg-[color:var(--neon-cyan)] text-background hover:bg-[color:var(--neon-cyan)]/90 neon-glow transition cursor-pointer"
+              className="min-h-11 px-4 py-2 text-sm font-semibold rounded-md bg-[color:var(--neon-cyan)] text-background hover:bg-[color:var(--neon-cyan)]/90 neon-glow transition cursor-pointer"
             >
               Try Again
             </button>

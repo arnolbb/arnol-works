@@ -16,7 +16,7 @@ export const TextDisplay = memo(function TextDisplay({
   charStates: CharState[];
 }) {
   return (
-    <div className="font-mono text-2xl md:text-3xl leading-relaxed tracking-wide select-none text-pretty">
+    <div className="keystrike-text-display font-mono text-base sm:text-lg md:text-2xl lg:text-3xl leading-relaxed sm:leading-relaxed tracking-normal sm:tracking-wide select-none text-pretty break-words [overflow-wrap:anywhere]">
       {Array.from(sentence, (ch, index) => {
         const state = charStates[index] ?? "pending";
         const renderedChar = ch === " " && state === "wrong" ? "·" : ch;
