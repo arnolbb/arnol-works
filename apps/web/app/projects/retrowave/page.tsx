@@ -33,11 +33,12 @@ const IconBack = () => (
 );
 
 export default function RetroWavePage() {
-  const [highScore, setHighScore] = useState(() => {
-    if (typeof window === "undefined") return 0;
+  const [highScore, setHighScore] = useState(0);
+
+  useEffect(() => {
     const saved = localStorage.getItem("neon-invaders-highscore");
-    return saved ? parseInt(saved, 10) : 0;
-  });
+    if (saved) setHighScore(parseInt(saved, 10));
+  }, []);
 
   const [metrics, setMetrics] = useState({
     cpu: "18%", ram: "42KB", temp: "44°C", signal: "STABLE",
@@ -167,3 +168,4 @@ export default function RetroWavePage() {
     </div>
   );
 }
+

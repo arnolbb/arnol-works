@@ -33,8 +33,8 @@ export default function SpaceInvaders({ onScoreUpdate, highScore }: { onScoreUpd
   const prevModeRef = useRef(gameMode);
 
   // Settings State
-  const [sfxOn, setSfxOn] = useState(() => localStorage.getItem('neon-starwave-sfx-enabled') !== 'false');
-  const [sfxVolume, setSfxVolume] = useState(() => parseFloat(localStorage.getItem('neon-starwave-sfx-volume') || '0.5'));
+  const [sfxOn, setSfxOn] = useState(true);
+  const [sfxVolume, setSfxVolume] = useState(0.5);
 
   // Sync settings
   useEffect(() => {
@@ -1546,6 +1546,7 @@ export default function SpaceInvaders({ onScoreUpdate, highScore }: { onScoreUpd
     </div>
   );
 }
+
 
 
 
