@@ -5,6 +5,7 @@ import { getAvailableTools, tools } from "@/lib/tools-registry";
 
 const projects = [
   { title: "Arnol Works Platform", status: "Live", description: "Portfolio + tools lab dengan utilitas PDF dan gambar yang bisa dipakai langsung.", meta: "Next.js · FastAPI · Local temp storage", href: "/" },
+  { title: "Laptop Match", status: "Live", description: "Temukan laptop paling ideal untuk kebutuhan kerja, kuliah, gaming, atau desain berdasarkan budget dan spesifikasi secara instan.", meta: "React · Tailwind CSS · Vercel", href: "https://laptop-match.vercel.app/" },
   { title: "RetroWave Arcade", status: "Live", description: "Game tembak-tembakan neon arcade Space Invaders dengan audio player synth dan efek CRT retro.", meta: "React · Canvas API · Web Audio API", href: "/projects/retrowave" },
   { title: "KeyStrike Time Attack", status: "Live", description: "Game mengetik bertema neon-cyberpunk. Uji dan latih kecepatan serta akurasi mengetikmu dalam 60 detik.", meta: "React · LocalStorage · Cyber Theme", href: "/projects/keystrike" },
   { title: "PDF Toolkit", status: "Active", description: "Pisah PDF warna/hitam-putih, kompres PDF, gabungkan PDF, dan konversi PDF ke JPG.", meta: "PyMuPDF · pypdf", href: "/tools" },
@@ -55,9 +56,15 @@ export default function ProjectsPage() {
                 <p className="mt-5 border-t border-slate-200/80 pt-4 font-mono text-xs text-slate-500 dark:border-brand-line/50 dark:text-slate-400">
                   {item.meta}
                 </p>
-                <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-brand-primary dark:text-indigo-300 hover:translate-x-1 transition-transform duration-200">
-                  Lihat detail →
-                </Link>
+                {item.href.startsWith("http") ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex text-sm font-semibold text-brand-primary dark:text-indigo-300 hover:translate-x-1 transition-transform duration-200">
+                    Lihat detail →
+                  </a>
+                ) : (
+                  <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-brand-primary dark:text-indigo-300 hover:translate-x-1 transition-transform duration-200">
+                    Lihat detail →
+                  </Link>
+                )}
               </div>
             </div>
           </Panel>
@@ -69,6 +76,38 @@ export default function ProjectsPage() {
 
 function renderProjectPreview(title: string) {
   switch (title) {
+    case "Laptop Match":
+      return (
+        <div className="w-full h-full relative flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-indigo-500/10 blur-xl rounded-full" />
+          <div className="relative flex flex-col items-center group-hover:scale-[1.03] transition-transform duration-300">
+            {/* Screen */}
+            <div className="w-28 h-18 rounded-t-lg border-2 border-slate-700 bg-slate-900 p-1 flex flex-col justify-between relative shadow-md">
+              <div className="flex justify-between items-center px-1 border-b border-slate-800 pb-0.5">
+                <div className="h-0.5 w-6 bg-blue-500/80 rounded-full" />
+                <div className="size-1 rounded-full bg-slate-700" />
+              </div>
+              <div className="flex-1 flex gap-1 p-1">
+                {/* Laptop card mockup */}
+                <div className="flex-1 bg-slate-800/80 rounded p-1 flex flex-col gap-0.5 justify-between">
+                  <div className="h-1 w-6 bg-slate-600 rounded-full" />
+                  <div className="h-0.5 w-8 bg-slate-700 rounded-full" />
+                  <div className="h-1 w-4 bg-blue-500 rounded-full" />
+                </div>
+                <div className="flex-1 bg-slate-800/80 rounded p-1 flex flex-col gap-0.5 justify-between">
+                  <div className="h-1 w-5 bg-slate-600 rounded-full" />
+                  <div className="h-0.5 w-8 bg-slate-700 rounded-full" />
+                  <div className="h-1 w-4 bg-blue-500 rounded-full" />
+                </div>
+              </div>
+            </div>
+            {/* Keyboard base */}
+            <div className="w-32 h-1.5 bg-slate-600 rounded-b-sm relative">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-slate-700 rounded-b-xs" />
+            </div>
+          </div>
+        </div>
+      );
     case "Arnol Works Platform":
       return (
         <div className="w-full h-full relative flex items-center justify-center p-4">
