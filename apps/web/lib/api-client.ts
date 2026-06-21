@@ -1,4 +1,4 @@
-﻿export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
 export type AnalyzePage = {
   pageNumber: number;
@@ -31,6 +31,8 @@ export type ToolProcessResult = {
   imageCount?: number;
   totalPages?: number;
   pageCount?: number;
+  preset?: string;
+  sizeNote?: string | null;
 };
 
 type ApiErrorPayload = { error?: { message?: string } };

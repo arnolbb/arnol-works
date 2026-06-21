@@ -1364,7 +1364,7 @@ export default function SpaceInvaders({ onScoreUpdate, highScore }: { onScoreUpd
         ctx.textAlign = 'center';
 
         const lines = [
-          '[A / D] or [â† / â†’]    : MOVE LEFT AND RIGHT',
+          '[A / D] or [? / ?]    : MOVE LEFT AND RIGHT',
           '[SPACEBAR]           : FIRE',
           '[P]                  : PAUSE OR RESUME',
           '',
@@ -1530,7 +1530,7 @@ export default function SpaceInvaders({ onScoreUpdate, highScore }: { onScoreUpd
 
       {/* Keyboard hints */}
       <div className="hidden lg:flex h-7 shrink-0 items-center text-[10px] text-neon-blue/55 font-mono uppercase tracking-[0.14em] gap-6 bg-black/30 px-5 rounded border border-white/10">
-        <span>[A/D] or [â†/â†’] MOVE</span>
+        <span>[A/D] or [?/?] MOVE</span>
         <span>[SPACE] FIRE</span>
         <span>[P] PAUSE</span>
       </div>

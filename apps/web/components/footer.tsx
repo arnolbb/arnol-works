@@ -1,11 +1,11 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Container } from "@/components/page-shell";
 
 export function SiteFooter() {
   return (
     <footer className="mt-20 border-t border-slate-200 dark:border-slate-600/80 bg-brand-paper dark:bg-slate-900 text-brand-ink dark:text-slate-50">
       <Container className="py-12">
-        <div className="grid gap-10 md:grid-cols-[1fr_auto_auto] md:justify-between">
+        <div className="grid gap-10 md:grid-cols-[1fr_auto_auto_auto] md:justify-between">
           <div>
             <h2 className="text-xl font-semibold tracking-[-0.02em]">Arnol Works</h2>
             <p className="mt-4 max-w-md text-sm leading-7 text-slate-600 dark:text-slate-300">Ruang kecil untuk membangun tools web, mencatat proses, dan mengubah masalah sehari-hari menjadi produk sederhana yang bisa dipakai.</p>
@@ -15,7 +15,15 @@ export function SiteFooter() {
             <div className="mt-4 grid gap-3 text-sm text-slate-700 dark:text-slate-200">
               <Link href="/tools" className="hover:text-brand-ink dark:text-slate-100">Tools</Link>
               <Link href="/projects" className="hover:text-brand-ink dark:text-slate-100">Projects</Link>
-              <Link href="/case-studies" className="hover:text-brand-ink dark:text-slate-100">Notes</Link>
+              <Link href="/notes" className="hover:text-brand-ink dark:text-slate-100">Notes</Link>
+            </div>
+          </div>
+          <div>
+            <h3 className="font-mono text-xs uppercase tracking-[0.22em] text-slate-500 dark:text-slate-300">Legal</h3>
+            <div className="mt-4 grid gap-3 text-sm text-slate-700 dark:text-slate-200">
+              <Link href="/privacy" className="hover:text-brand-ink dark:text-slate-100">Kebijakan Privasi</Link>
+              <Link href="/terms" className="hover:text-brand-ink dark:text-slate-100">Syarat Penggunaan</Link>
+              <Link href="/file-retention" className="hover:text-brand-ink dark:text-slate-100">Retensi File</Link>
             </div>
           </div>
           <div>

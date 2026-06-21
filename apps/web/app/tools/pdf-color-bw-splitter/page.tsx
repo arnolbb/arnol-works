@@ -1,4 +1,10 @@
-﻿import Link from "next/link";
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Pisah PDF Warna & Hitam Putih",
+  description: "Pisahkan halaman PDF berwarna dan hitam-putih menjadi dua file berbeda agar biaya print lebih hemat.",
+  openGraph: { title: "Pisah PDF Warna & BW — Arnol Works", description: "Hemat biaya print dengan memisahkan halaman PDF berwarna dan hitam-putih.", url: "https://arnol.my.id/tools/pdf-color-bw-splitter" },
+};
+import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
 import { PdfUploadForm } from "@/components/pdf/pdf-upload-form";
 import { StatusBadge } from "@/components/ui";

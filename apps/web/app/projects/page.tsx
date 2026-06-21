@@ -1,14 +1,14 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
 import { Eyebrow, Panel, StatusBadge } from "@/components/ui";
 import { getAvailableTools, tools } from "@/lib/tools-registry";
 
 const projects = [
-  { title: "Arnol Works Platform", status: "Live", description: "Portfolio + tools lab dengan utilitas PDF dan gambar yang bisa dipakai langsung.", meta: "Next.js · FastAPI · Local temp storage", href: "/" },
+  { title: "Arnol Works Platform", status: "Live", description: "Portfolio + tools lab dengan utilitas PDF dan gambar yang bisa dipakai langsung.", meta: "Next.js · FastAPI · Local temp storage", href: "/projects/arnol-works" },
   { title: "Laptop Match", status: "Live", description: "Temukan laptop paling ideal untuk kebutuhan kerja, kuliah, gaming, atau desain berdasarkan budget dan spesifikasi secara instan.", meta: "React · Tailwind CSS · Vercel", href: "https://laptop-match.vercel.app/" },
   { title: "RetroWave Arcade", status: "Live", description: "Game tembak-tembakan neon arcade Space Invaders dengan audio player synth dan efek CRT retro.", meta: "React · Canvas API · Web Audio API", href: "/projects/retrowave" },
   { title: "KeyStrike Time Attack", status: "Live", description: "Game mengetik bertema neon-cyberpunk. Uji dan latih kecepatan serta akurasi mengetikmu dalam 60 detik.", meta: "React · LocalStorage · Cyber Theme", href: "/projects/keystrike" },
-  { title: "PDF Toolkit", status: "Active", description: "Pisah PDF warna/hitam-putih, kompres PDF, gabungkan PDF, dan konversi PDF ke JPG.", meta: "PyMuPDF · pypdf", href: "/tools" },
+  { title: "PDF Toolkit", status: "Active", description: "Pisah PDF warna/hitam-putih, kompres PDF, gabungkan PDF, dan konversi PDF ke JPG.", meta: "PyMuPDF · pypdf", href: "/projects/pdf-color-bw-splitter" },
   { title: "Image Toolkit", status: "Active", description: "JPG/PNG ke PDF, kompres gambar, dan resize gambar untuk kebutuhan upload harian.", meta: "Pillow · ZIP output", href: "/tools" },
 ];
 

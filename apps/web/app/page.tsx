@@ -1,4 +1,23 @@
-﻿import Link from "next/link";
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/json-ld";
+import { websiteSchema } from "@/lib/structured-data";
+
+const SITE_URL = "https://arnol.my.id";
+
+export const metadata: Metadata = {
+  title: "Arnol Works — Tools Web Praktis untuk Dokumen & Gambar",
+  description: "Kumpulan utilitas PDF dan gambar yang bisa langsung dipakai: kompres, gabung, konversi, resize, dan split file. Gratis, tanpa login.",
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    title: "Arnol Works — Tools Web Praktis",
+    description: "Kompres, gabung, konversi, dan split PDF & gambar secara instan. Gratis tanpa login.",
+    siteName: "Arnol Works",
+    images: [{ url: `${SITE_URL}/brand/logo-light-with-text.png`, width: 800, alt: "Arnol Works" }],
+  },
+  twitter: { card: "summary", title: "Arnol Works — Tools Web Praktis", description: "Kompres, gabung, konversi, dan split PDF & gambar secara instan. Gratis tanpa login." },
+};
+import Link from "next/link";
 import { Container } from "@/components/page-shell";
 import { getAvailableTools, tools } from "@/lib/tools-registry";
 import { ToolIcon } from "@/components/tools/tool-icon";

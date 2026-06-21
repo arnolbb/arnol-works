@@ -1,16 +1,27 @@
-﻿import os
+import os
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.routes.pdf import router as pdf_router
-from app.services.storage import cleanup_old_jobs
+from app.services.storage import cleanup_old_jobs, start_periodic_cleanup, stop_periodic_cleanup
+
+
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+    cleanup_old_jobs()
+    start_periodic_cleanup()
+    yield
+    stop_periodic_cleanup()
+
 
 app = FastAPI(
     title="Arnol Works API",
     description="Backend API for Arnol Works portfolio and multi-tools platform.",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
 allowed_origins = [
@@ -42,11 +53,6 @@ async def http_exception_handler(request: Request, exc: HTTPException) -> JSONRe
 
 
 app.include_router(pdf_router)
-
-
-@app.on_event("startup")
-def on_startup() -> None:
-    cleanup_old_jobs()
 
 
 @app.get("/health")

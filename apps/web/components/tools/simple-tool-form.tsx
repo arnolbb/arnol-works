@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { fileUrl, processTool, type ToolProcessResult } from "@/lib/api-client";
@@ -26,7 +26,16 @@ function formatBytes(bytes?: number) {
   return `${value.toFixed(value >= 10 || unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
 }
 
-export function SimpleToolForm({ endpoint, accept, multiple = false, title, description, buttonLabel, outputLabel, extraField }: SimpleToolFormProps) {
+export function SimpleToolForm({
+  endpoint,
+  accept,
+  multiple = false,
+  title,
+  description,
+  buttonLabel,
+  outputLabel,
+  extraField,
+}: SimpleToolFormProps) {
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState<"idle" | "processing" | "done">("idle");
   const [error, setError] = useState<string | null>(null);
@@ -49,6 +58,16 @@ export function SimpleToolForm({ endpoint, accept, multiple = false, title, desc
     }
   }
 
+  function handleReset() {
+    setFiles([]);
+    setStatus("idle");
+    setError(null);
+    setResult(null);
+  }
+
+  const isProcessing = status === "processing";
+  const isDone = status === "done";
+
   return (
     <section className="rounded-[22px] border border-slate-200 bg-white p-5 dark:border-brand-line dark:bg-slate-900/75 sm:p-7">
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
@@ -58,14 +77,25 @@ export function SimpleToolForm({ endpoint, accept, multiple = false, title, desc
             <span className="mt-4 text-xl font-medium text-brand-ink dark:text-slate-100">{title}</span>
             <span className="mt-2 max-w-lg text-sm leading-6 text-slate-600 dark:text-slate-400">{description}</span>
             <span className="mt-5 rounded-md bg-brand-primary px-5 py-3 text-sm font-semibold text-white">Pilih File</span>
-            <input type="file" accept={accept} multiple={multiple} className="sr-only" onChange={(event) => setFiles(Array.from(event.target.files ?? []))} />
+            <input
+              type="file"
+              accept={accept}
+              multiple={multiple}
+              className="sr-only"
+              onChange={(event) => setFiles(Array.from(event.target.files ?? []))}
+            />
           </label>
 
           {files.length > 0 ? (
             <div className="mt-5 rounded-2xl border border-slate-200 bg-brand-paper p-4 dark:border-brand-line dark:bg-slate-950/70">
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">File dipilih</p>
               <div className="mt-3 grid gap-2 text-sm text-slate-700 dark:text-slate-300">
-                {files.map((file) => <p key={`${file.name}-${file.size}`} className="flex justify-between gap-4"><span className="truncate">{file.name}</span><span className="shrink-0">{formatBytes(file.size)}</span></p>)}
+                {files.map((file) => (
+                  <p key={`${file.name}-${file.size}`} className="flex justify-between gap-4">
+                    <span className="truncate">{file.name}</span>
+                    <span className="shrink-0">{formatBytes(file.size)}</span>
+                  </p>
+                ))}
               </div>
             </div>
           ) : null}
@@ -74,27 +104,61 @@ export function SimpleToolForm({ endpoint, accept, multiple = false, title, desc
             <label className="mt-5 block rounded-2xl border border-slate-200 bg-brand-paper p-4 dark:border-brand-line dark:bg-slate-950/70">
               <span className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{extraField.label}</span>
               <div className="mt-3 flex items-center gap-3">
-                <input value={extraValue} onChange={(event) => setExtraValue(event.target.value)} inputMode="numeric" className="h-11 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-brand-ink outline-none focus:border-brand-primary dark:border-brand-line dark:bg-slate-900 dark:text-slate-100" />
+                <input
+                  value={extraValue}
+                  onChange={(event) => setExtraValue(event.target.value)}
+                  inputMode="numeric"
+                  className="h-11 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-brand-ink outline-none focus:border-brand-primary dark:border-brand-line dark:bg-slate-900 dark:text-slate-100"
+                />
                 {extraField.suffix ? <span className="text-sm text-slate-500 dark:text-slate-400">{extraField.suffix}</span> : null}
               </div>
             </label>
           ) : null}
 
-          {error ? <div className="mt-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-400/30 dark:bg-red-400/10 dark:text-red-300">{error}</div> : null}
+          {error ? (
+            <div
+              role="alert"
+              className="mt-5 rounded-xl border border-red-200 bg-red-50 p-4 dark:border-red-400/30 dark:bg-red-400/10"
+            >
+              <p className="text-sm font-medium text-red-700 dark:text-red-300">{error}</p>
+              <button
+                type="button"
+                onClick={handleProcess}
+                disabled={files.length === 0}
+                className="mt-3 rounded-md border border-red-300 bg-white px-4 py-2 text-xs font-semibold text-red-700 transition hover:bg-red-50 disabled:opacity-50 dark:border-red-400/40 dark:bg-transparent dark:text-red-300 dark:hover:bg-red-400/10"
+              >
+                Coba Lagi
+              </button>
+            </div>
+          ) : null}
         </div>
 
         <aside className="rounded-[18px] border border-slate-200 bg-brand-paper p-5 dark:border-brand-line dark:bg-slate-950/70">
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Output</p>
           <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-brand-ink dark:text-slate-100">{outputLabel}</h2>
           <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">File diproses sementara dan bisa langsung diunduh setelah selesai.</p>
-          <button type="button" disabled={files.length === 0 || status === "processing"} onClick={handleProcess} className="mt-6 w-full rounded-md bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 dark:bg-white dark:text-brand-night dark:hover:bg-slate-200 dark:disabled:bg-slate-800 dark:disabled:text-slate-500">
-            {status === "processing" ? "Memproses..." : buttonLabel}
-          </button>
+
+          {!isDone ? (
+            <button
+              type="button"
+              disabled={files.length === 0 || isProcessing}
+              onClick={handleProcess}
+              aria-busy={isProcessing}
+              className="mt-6 w-full rounded-md bg-black px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 dark:bg-white dark:text-brand-night dark:hover:bg-slate-200 dark:disabled:bg-slate-800 dark:disabled:text-slate-500"
+            >
+              {isProcessing ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" aria-hidden="true" />
+                  Memproses...
+                </span>
+              ) : buttonLabel}
+            </button>
+          ) : null}
 
           {result ? (
-            <div className="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200">
-              <p className="font-semibold">Selesai diproses.</p>
-              <div className="mt-3 grid gap-1 text-xs">
+            <div className="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-400/30 dark:bg-emerald-400/10">
+              <p className="text-sm font-semibold text-emerald-800 dark:text-emerald-200">Selesai diproses.</p>
+              <div className="mt-3 grid gap-1 text-xs text-emerald-800 dark:text-emerald-200">
                 {result.originalSize ? <p>Ukuran awal: {formatBytes(result.originalSize)}</p> : null}
                 {result.outputSize ? <p>Ukuran hasil: {formatBytes(result.outputSize)}</p> : null}
                 {typeof result.reductionPercent === "number" ? <p>Pengurangan: {result.reductionPercent}%</p> : null}
@@ -103,7 +167,19 @@ export function SimpleToolForm({ endpoint, accept, multiple = false, title, desc
                 {result.totalPages ? <p>Total halaman: {result.totalPages}</p> : null}
                 {result.pageCount ? <p>Total gambar: {result.pageCount}</p> : null}
               </div>
-              <a href={fileUrl(result.downloadUrl) ?? "#"} className="mt-4 inline-flex w-full justify-center rounded-md bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700">Download Hasil</a>
+              <a
+                href={fileUrl(result.downloadUrl) ?? "#"}
+                className="mt-4 inline-flex w-full justify-center rounded-md bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700"
+              >
+                Download Hasil
+              </a>
+              <button
+                type="button"
+                onClick={handleReset}
+                className="mt-3 w-full rounded-md border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 dark:border-brand-line dark:bg-transparent dark:text-slate-400 dark:hover:bg-slate-800"
+              >
+                Proses File Baru
+              </button>
             </div>
           ) : null}
         </aside>

@@ -1,4 +1,4 @@
-﻿export type ToolStatus = "available" | "coming-soon";
+export type ToolStatus = "available" | "coming-soon";
 
 export type Tool = {
   id: string;
@@ -120,8 +120,8 @@ export const tools: Tool[] = [
     description: "Hapus background gambar secara otomatis menggunakan AI. Cocok untuk foto produk, pas foto, dan desain.",
     category: "Gambar",
     tags: ["Gambar", "AI", "Background"],
-    status: "coming-soon",
-    href: "/tools",
+    status: "available",
+    href: "/tools/remove-bg",
     icon: "IMG",
   },
   {
@@ -132,8 +132,8 @@ export const tools: Tool[] = [
     description: "Buat pas foto ukuran 2\u00d73, 3\u00d74, atau 4\u00d76 dengan background merah, biru, atau putih. Siap cetak.",
     category: "Gambar",
     tags: ["Gambar", "Pas Foto", "AI"],
-    status: "coming-soon",
-    href: "/tools",
+    status: "available",
+    href: "/tools/passport-photo",
     icon: "IMG",
   },
   {

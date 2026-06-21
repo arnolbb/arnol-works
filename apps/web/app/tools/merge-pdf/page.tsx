@@ -1,7 +1,14 @@
-﻿import Link from "next/link";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
-import { SimpleToolForm } from "@/components/tools/simple-tool-form";
+import { MergePdfForm } from "@/components/tools/merge-pdf-form";
 import { StatusBadge } from "@/components/ui";
+
+export const metadata: Metadata = {
+  title: "Gabungkan PDF",
+  description: "Gabungkan beberapa file PDF menjadi satu dokumen yang rapi. Atur urutan file sebelum digabungkan. Gratis tanpa login.",
+  openGraph: { title: "Gabungkan PDF — Arnol Works", description: "Gabungkan beberapa PDF menjadi satu. Gratis tanpa login.", url: "https://arnol.my.id/tools/merge-pdf" },
+};
 
 export default function ToolPage() {
   return (
@@ -13,14 +20,14 @@ export default function ToolPage() {
           <span className="text-brand-primary dark:text-indigo-300">PDF Utility</span>
         </div>
         <h1 className="mt-5 text-3xl font-semibold tracking-[-0.03em] text-brand-ink dark:text-slate-100 sm:text-4xl">Gabungkan PDF</h1>
-        <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-slate-300 sm:text-base sm:leading-8">Upload beberapa PDF, lalu gabungkan menjadi satu dokumen rapi sesuai urutan file yang dipilih.</p>
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-slate-300 sm:text-base sm:leading-8">Upload beberapa PDF, atur urutan file sesuai keinginan, lalu gabungkan menjadi satu dokumen rapi.</p>
         <div className="mt-5 flex flex-wrap gap-2">
           <StatusBadge tone="emerald">Gratis</StatusBadge>
           <StatusBadge tone="indigo">Tanpa Login</StatusBadge>
           <StatusBadge tone="slate">File Sementara</StatusBadge>
         </div>
       </div>
-      <SimpleToolForm endpoint="/api/pdf/merge" accept="application/pdf,.pdf" multiple title="Gabungkan PDF" description="Upload beberapa PDF, lalu gabungkan menjadi satu dokumen rapi sesuai urutan file yang dipilih." buttonLabel="Gabungkan PDF" outputLabel="PDF gabungan" />
+      <MergePdfForm />
     </PageShell>
   );
 }

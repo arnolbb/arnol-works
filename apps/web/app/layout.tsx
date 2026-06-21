@@ -1,11 +1,20 @@
-﻿import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { SiteFooter } from "@/components/footer";
 import { SiteHeader } from "@/components/header";
 import "./globals.css";
 
+const SITE_URL = "https://arnol.my.id";
+
 export const metadata: Metadata = {
-  title: "Arnol Works",
-  description: "Useful web tools and product experiments built by Arnol.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Arnol Works — Tools Web Praktis",
+    template: "%s — Arnol Works",
+  },
+  description: "Kumpulan utilitas PDF dan gambar yang bisa langsung dipakai: kompres, gabung, konversi, resize, dan split file. Gratis, tanpa login.",
+  authors: [{ name: "Arnol Works", url: SITE_URL }],
+  creator: "Arnol Works",
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
